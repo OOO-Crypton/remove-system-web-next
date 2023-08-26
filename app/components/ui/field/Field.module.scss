@@ -1,0 +1,30 @@
+.common {
+	> label {
+		@apply block;
+
+		> span {
+			@apply text-xs uppercase text-gray-600 block;
+		}
+	}
+}
+
+.field {
+	@apply text-left mb-2;
+
+	input {
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+		display: block;
+		font-size: 16px;
+		height: 38px;
+		outline: none;
+		padding: 0 10px;
+		width: 100%;
+		color: #000;
+	}
+}
+
+.error {
+	@apply text-sm w-full text-primary;
+}

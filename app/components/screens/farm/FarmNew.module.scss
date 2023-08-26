@@ -1,0 +1,38 @@
+.download {
+	.infoDetails {
+		background-color: var(--light-dark);
+		padding: 10px;
+		margin: 5px 0;
+		border: none;
+		border-radius: 5px;
+
+		summary:hover::marker,
+		summary:hover {
+			color: var(--green);
+		}
+
+		summary {
+			cursor: pointer;
+		}
+	}
+
+	.infoDetails[open] {
+		summary ~ * {
+			animation: sweep 0.4s ease-in-out;
+		}
+		summary::marker,
+		summary {
+			color: var(--green);
+			margin-bottom: 20px;
+		}
+	}
+}
+
+@keyframes sweep {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

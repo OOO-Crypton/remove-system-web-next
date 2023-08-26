@@ -1,0 +1,79 @@
+.wallets,
+.editWallet,
+.newWallet {
+	padding: 2rem;
+	background-color: var(--light-dark);
+	border-radius: 1rem;
+
+	> h1 {
+		margin-bottom: 10px;
+		text-align: center;
+	}
+}
+
+.wallets {
+	.items {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+
+		.item {
+			display: flex;
+			justify-content: space-between;
+			width: 49%;
+			padding: 10px 0;
+		}
+	}
+
+	svg {
+		margin: 0 5px;
+		fill: var(--white);
+		transition: all 0.2s ease-in-out;
+		cursor: pointer;
+
+		&:hover {
+			fill: var(--green);
+			transform: scale(1.2);
+		}
+
+		&.edit {
+			&:hover {
+				fill: var(--yellow);
+			}
+		}
+
+		&.trash {
+			&:hover {
+				fill: var(--red);
+			}
+		}
+	}
+}
+
+.newWallet {
+}
+
+.editWallet {
+	width: 50%;
+	margin: 0 auto;
+
+	form {
+		display: flex;
+		flex-direction: column;
+
+		label {
+			display: flex;
+			flex-direction: column;
+
+			input,
+			select {
+				margin-bottom: 10px;
+			}
+		}
+
+		button {
+			width: min-content;
+			margin: 0 auto;
+		}
+	}
+}

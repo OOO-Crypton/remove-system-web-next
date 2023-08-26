@@ -1,0 +1,30 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+
+	.mainDiv {
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		row-gap: 10px;
+		width: max-content;
+
+		.pic {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.buttonsDiv {
+			width: 100%;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			align-items: center;
+
+			.button {
+				width: 150px;
+			}
+		}
+	}
+}

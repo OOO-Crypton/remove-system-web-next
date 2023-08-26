@@ -1,0 +1,101 @@
+.flyLists {
+	padding: 2rem;
+	background-color: var(--light-dark);
+	border-radius: 1rem;
+
+	> h1 {
+		margin-bottom: 10px;
+		text-align: center;
+	}
+
+	.active {
+		width: 45%;
+		margin-bottom: 10px;
+
+		> h2 {
+			margin-bottom: 10px;
+		}
+
+		.content {
+			display: flex;
+			justify-content: space-between;
+			gap: 20px;
+		}
+	}
+
+	.noActive {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+
+		.content {
+			width: 45%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.btns {
+				display: flex;
+			}
+		}
+	}
+
+	svg {
+		margin: 0 5px;
+		fill: var(--white);
+		transition: all 0.2s ease-in-out;
+		cursor: pointer;
+
+		&:hover {
+			fill: var(--green);
+			transform: scale(1.2);
+		}
+
+		&.edit {
+			&:hover {
+				fill: var(--yellow);
+			}
+		}
+
+		&.trash {
+			&:hover {
+				fill: var(--red);
+			}
+		}
+	}
+}
+
+.flyList {
+	background-color: var(--light-dark);
+	border-radius: 1rem;
+	padding: 3rem 3rem 1.5rem 3rem;
+	width: 60%;
+	margin: 0 auto;
+
+	h1 {
+		color: var(--white);
+		margin-bottom: 1rem;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+
+		label {
+			color: var(--white);
+
+			input,
+			select {
+				width: 100%;
+				box-sizing: border-box;
+				margin-bottom: 0.5rem;
+			}
+		}
+
+		button {
+			width: min-content;
+			margin: 1rem auto 0 auto;
+		}
+	}
+}

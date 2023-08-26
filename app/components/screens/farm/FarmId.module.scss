@@ -1,0 +1,171 @@
+.mainWrapper {
+	padding: 2rem;
+	background-color: var(--light-dark);
+	border-radius: 1rem;
+
+	> h1 {
+		font-size: 26px;
+		margin: 0 auto;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.infoWrapper {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.farmSysInfo {
+			display: flex;
+			flex-direction: column;
+			min-width: 50vw;
+			margin-bottom: 40px;
+
+			h2 {
+				margin-bottom: 15px;
+			}
+
+			.sysInfoDesc {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+		}
+
+		.btnsReboot {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 1rem;
+		}
+	}
+
+	.gpuTableWrapper {
+		.gpuTable {
+			position: relative;
+			border-collapse: collapse;
+			border: 3px solid var(--white);
+			width: 100%;
+
+			img {
+				cursor: pointer;
+			}
+
+			tr {
+				border-bottom: 2px solid var(--white);
+				text-align: center;
+
+				th {
+					color: var(--white);
+					background-color: var(--dark);
+					border-left: 2px solid var(--white);
+					position: -webkit-sticky;
+					position: sticky;
+					top: 0;
+					z-index: 1;
+					padding: 5px;
+				}
+
+				td {
+					color: var(--white);
+					border-left: 2px solid var(--white);
+					padding: 5px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.generalInfo {
+		justify-content: space-between;
+	}
+	.btnsReboot {
+		margin: 0;
+	}
+
+	.infoWrapper {
+		justify-content: space-between;
+	}
+
+	.farmSysInfo {
+		min-width: 0;
+	}
+
+	.sysInfoDesc {
+		column-gap: 50px;
+	}
+
+	.btnsReboot {
+		flex-direction: column;
+		row-gap: 10px;
+	}
+}
+
+@media only screen and (max-width: 1050px) {
+	.gpuTableWrapper {
+		overflow-x: scroll;
+	}
+
+	.gpuTable {
+		min-width: 800px;
+	}
+}
+
+@media only screen and (max-width: 915px) {
+	.farmSysInfo {
+		width: 100%;
+	}
+	.sysInfo {
+		margin-bottom: 20px;
+	}
+	.sysInfo h2 {
+		text-align: center;
+	}
+	.sysInfoDesc {
+		column-gap: 30px;
+		grid-template-columns: repeat(2, auto);
+	}
+	.btnsReboot {
+		flex-direction: row;
+		width: 100%;
+		justify-content: flex-end;
+	}
+	.infoWrapper {
+		margin-bottom: 20px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.mainWrapper h1 {
+		font-size: 22px;
+	}
+	.sysInfo h2 {
+		font-size: 20px;
+	}
+	.generalInfo {
+		margin-bottom: 20px;
+	}
+	.generalInfo h2 {
+		width: 100px;
+		height: 40px;
+	}
+	.farmInfo {
+		margin-bottom: 30px;
+	}
+	.farmInfo h3 {
+		font-size: 18px;
+	}
+	.sysInfoDesc {
+		justify-items: stretch;
+		justify-content: space-between;
+	}
+}
+
+@media only screen and (max-width: 682px) {
+	.generalInfo {
+		max-width: 350px;
+		row-gap: 10px;
+		margin: 0 auto 20px auto;
+	}
+}
