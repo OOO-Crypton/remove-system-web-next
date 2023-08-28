@@ -1,31 +1,65 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { FC, useEffect, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import Select from 'react-select'
+import { toast } from 'react-toastify'
 
-import { Button } from '@/components/ui/Button/Button'
-import { Input } from '@/components/ui/Input/Input'
-import { Select } from '@/components/ui/Select/Select'
+import { Button, Input } from '@/components/ui'
 
-import { IWallet } from '@/shared/types/wallet.type'
+import { ICurrency, IWalletForm } from '@/shared/types/wallet.type'
+
+import { WalletsService } from '@/services/wallets/wallets.service'
+
+import { SelectMyStyles } from '@/configs/stylesSelect.config'
 
 import styles from './Wallets.module.scss'
 
-const WalletNew: FC = () => {
-	const { register, handleSubmit } = useForm<IWallet>({
-		mode: 'onBlur',
+const WalletNewScreen: FC = () => {
+	const [currency, setCurrency] = useState<ICurrency[]>([])
+
+	const { push } = useRouter()
+
+	useEffect(() => {
+		const getCurrencies = async () => {
+			const res = await WalletsService.getCurrenciesList()
+			setCurrency(res)
+		}
+		getCurrencies()
+	}, [])
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		control,
+		setValue,
+	} = useForm<IWalletForm>({
+		mode: 'onChange',
 	})
 
-	const submit = handleSubmit((value) => {
-		console.log(value)
-	})
+	const onSubmit: SubmitHandler<IWalletForm> = async (body) => {
+		console.log(body)
+
+		// const status = await WalletsService.create(body)
+
+		// if (status === 200) {
+		// 	toast.success('Кошелёк добавлен')
+		// 	push('/wallets')
+		// }
+	}
+
+	const handleCategoryInputChange = (name: any, newValue: any) =>
+		setValue(name, newValue.value)
 
 	return (
 		<div className={styles.editWallet}>
 			<h1>Создание нового кошелька</h1>
-			<form onSubmit={submit}>
-				<label htmlFor="name">
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<label htmlFor="Name">
 					Название
 					<Input
 						type="text"
+						id="Name"
 						{...register('name', {
 							required: true,
 						})}
@@ -33,16 +67,26 @@ const WalletNew: FC = () => {
 						placeholder="Введите назавние"
 					/>
 				</label>
-				<label htmlFor="coin">
+				<label htmlFor="currency">
 					Монета
-					<Select
-						id="coin"
-						required
-						{...register('coin', {
-							required: true,
-						})}
-						options={[{ label: 'coin', value: 1 }]}
-						selected={{ label: 'Выберите монету' }}
+					<Controller
+						control={control}
+						name="currency"
+						render={({ field: { ref } }) => (
+							<Select
+								id="currency"
+								ref={ref}
+								onChange={(value) =>
+									handleCategoryInputChange('currency', value)
+								}
+								required
+								options={currency.map((item) => ({
+									value: item.id,
+									label: item.name,
+								}))}
+								styles={SelectMyStyles}
+							/>
+						)}
 					/>
 				</label>
 				<label htmlFor="address">
@@ -64,4 +108,4 @@ const WalletNew: FC = () => {
 	)
 }
 
-export default WalletNew
+export default WalletNewScreen

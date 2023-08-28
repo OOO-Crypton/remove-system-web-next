@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { Button } from '@/components/ui/Button/Button'
-import Field from '@/components/ui/field/Field'
+import { Button, Field } from '@/components/ui'
 
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
@@ -14,7 +13,7 @@ import { ILogin } from '@/store/user/user.interface'
 import styles from './Auth.module.scss'
 import { useAuthRedirect } from './useAuthRedirect'
 
-const Auth: FC = () => {
+const AuthScreen: FC = () => {
 	useAuthRedirect()
 
 	const { isLoading } = useAuth()
@@ -61,4 +60,4 @@ const Auth: FC = () => {
 	)
 }
 
-export default Auth
+export default AuthScreen

@@ -18,7 +18,7 @@ const CheckRole: FC<TypeComponentAuthFields> = ({
 	if (!isOnlyAdmin && !isOnlyUser) return <Children />
 
 	if (!token) {
-		router.replace(`/auth?redirect=${router.pathname}`)
+		router.replace(`/auth?redirect=${router.asPath}`)
 		return null
 	}
 
@@ -32,7 +32,7 @@ const CheckRole: FC<TypeComponentAuthFields> = ({
 	if (isUser && isOnlyUser) return <Children />
 	else {
 		router.pathname !== '/auth' &&
-			router.replace(`/auth?redirect=${router.pathname}`)
+			router.replace(`/auth?redirect=${router.asPath}`)
 		return null
 	}
 }

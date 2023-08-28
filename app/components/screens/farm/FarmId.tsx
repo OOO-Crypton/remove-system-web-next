@@ -2,15 +2,14 @@ import { nanoid } from '@reduxjs/toolkit'
 import Image from 'next/image'
 import { FC } from 'react'
 
-import { Button } from '@/components/ui/Button/Button'
+import { Button } from '@/components/ui'
 
 import { IFarm } from '@/shared/types/farm.types'
 
-import { HomeData } from '../home/data'
-
 import styles from './FarmId.module.scss'
+import { HomeData } from './data'
 
-const FarmId: FC<{ id: string }> = ({ id }) => {
+const FarmIdScreen: FC<{ id: string }> = ({ id }) => {
 	const farm: IFarm = HomeData.filter((item) => item.id === id)[0]
 
 	return (
@@ -92,4 +91,4 @@ const FarmId: FC<{ id: string }> = ({ id }) => {
 	)
 }
 
-export default FarmId
+export default FarmIdScreen

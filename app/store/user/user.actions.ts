@@ -37,6 +37,7 @@ export const login = createAsyncThunk<IAuthResponse, ILogin>(
 		try {
 			const { data } = await AuthService.login(email, password)
 			toast.success('Авторизация успешная')
+
 			const decodeToken: any = jwtDecode(data.token!)
 
 			return {

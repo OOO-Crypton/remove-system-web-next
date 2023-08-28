@@ -1,101 +1,140 @@
-import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import Select from 'react-select'
+import { toast } from 'react-toastify'
 
-import { Button } from '@/components/ui/Button/Button'
-import { Input } from '@/components/ui/Input/Input'
-import { Select } from '@/components/ui/Select/Select'
-import SubHeading from '@/components/ui/heading/SubHeading'
+import { Button, Heading, Input, Loader } from '@/components/ui'
+
+import { IFlyListsForm } from '@/shared/types/flyList.type'
+import { IWallet } from '@/shared/types/wallet.type'
+
+import { FlightSheetsService, WalletsService } from '@/services/index'
+
+import { SelectMyStyles } from '@/configs/stylesSelect.config'
 
 import styles from './FlyLists.module.scss'
 
-interface IFormFlyList {
-	name: string
-	coin: string
-	wallet: string
-	pull: string
-	miner: string
-}
+const FlyListNewScreen = () => {
+	const [wallet, setWallet] = useState<IWallet[]>()
+	const [isLoad, setIsLoad] = useState<boolean>(true)
 
-const FlyListNew = () => {
-	const { register, handleSubmit } = useForm<IFormFlyList>({
+	const { push } = useRouter()
+
+	useEffect(() => {
+		const getData = async () => {
+			const wallet = await WalletsService.getAll()
+
+			setWallet(wallet)
+			setIsLoad(false)
+		}
+
+		getData()
+	}, [])
+
+	const { register, handleSubmit, control, setValue } = useForm<IFlyListsForm>({
 		mode: 'onBlur',
 	})
 
-	const submit = handleSubmit((value) => {
-		console.log(value)
+	const submit = handleSubmit(async (value) => {
+		const { status } = await FlightSheetsService.create(value)
+
+		if (status === 200) {
+			toast.success('Полетный лист добавлен')
+			push('/fly-lists')
+		}
 	})
+
+	const handleCategoryInputChange = (name: any, newValue: any) =>
+		setValue(name, newValue.value)
 
 	return (
 		<div className={styles.flyList}>
-			<SubHeading title="Создание нового полетного листа" />
-			<form onSubmit={submit}>
-				<label htmlFor="name">
-					Название
-					<Input
-						type="text"
-						{...register('name', {
-							required: true,
-						})}
-						required
-						placeholder="Введите назавние"
-					/>
-				</label>
-				<label htmlFor="coin">
-					Монета
-					<Select
-						id="coin"
-						required
-						{...register('coin', {
-							required: true,
-						})}
-						options={[
-							{ label: 'coin 1', value: 1 },
-							{ label: 'coin ', value: 2 },
-						]}
-						selected={{ label: 'Выберите монету' }}
-					/>
-				</label>
-				<label htmlFor="wallet">
-					Кошелек
-					<Select
-						id="wallet"
-						required
-						{...register('wallet', {
-							required: true,
-						})}
-						options={[{ label: 'wallet', value: 1 }]}
-						selected={{ label: 'Выберите кашелек' }}
-					/>
-				</label>
-				<label htmlFor="pull">
-					Пулл
-					<Select
-						id="pull"
-						required
-						{...register('pull', {
-							required: true,
-						})}
-						options={[{ label: 'pull', value: 1 }]}
-						selected={{ label: 'Выберите пулл' }}
-					/>
-				</label>
-				<label htmlFor="miner">
-					Майнер
-					<Select
-						id="miner"
-						required
-						{...register('miner', {
-							required: true,
-						})}
-						options={[{ label: 'miner', value: 1 }]}
-						selected={{ label: 'Выберите майнер' }}
-					/>
-				</label>
-				<Button appearance="white" hover="green">
-					Создать
-				</Button>
-			</form>
+			{isLoad ? (
+				<Loader />
+			) : (
+				<>
+					<Heading title="Создание нового полетного листа" />
+					<form onSubmit={submit}>
+						<label htmlFor="name">
+							Название
+							<Input
+								type="text"
+								{...register('name', {
+									required: true,
+								})}
+								required
+								placeholder="Введите назавние"
+							/>
+						</label>
+						<label htmlFor="wallet">
+							Кошелек
+							<Controller
+								control={control}
+								name="wallet"
+								render={({ field: { ref } }) => (
+									<Select
+										id="wallet"
+										ref={ref}
+										onChange={(value) =>
+											handleCategoryInputChange('wallet', value)
+										}
+										options={wallet!.map((item) => ({
+											value: item.id,
+											label: item.name,
+										}))}
+										styles={SelectMyStyles}
+										required
+									/>
+								)}
+							/>
+						</label>
+						<label htmlFor="pool">
+							Пулл
+							<Controller
+								control={control}
+								name="pool"
+								render={({ field: { ref } }) => (
+									<Select
+										id="pool"
+										ref={ref}
+										onChange={(value) =>
+											handleCategoryInputChange('pool', value)
+										}
+										options={[{ label: 'pull', value: 1 }]}
+										styles={SelectMyStyles}
+										required
+									/>
+								)}
+							/>
+						</label>
+						<label htmlFor="miner">
+							Майнер
+							<Controller
+								control={control}
+								name="miner"
+								render={({ field: { ref } }) => (
+									<Select
+										id="miner"
+										ref={ref}
+										onChange={(value) =>
+											handleCategoryInputChange('miner', value)
+										}
+										options={[{ label: 'miner', value: 1 }]}
+										styles={SelectMyStyles}
+										required
+									/>
+								)}
+							/>
+						</label>
+						<Button appearance="white" hover="green">
+							Создать
+						</Button>
+					</form>
+				</>
+			)}
 		</div>
 	)
 }
 
-export default FlyListNew
+export default FlyListNewScreen

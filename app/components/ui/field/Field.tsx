@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 import styles from './Field.module.scss'
 import { IField } from './Field.type'
 
-const Field = forwardRef<HTMLInputElement, IField>(
+export const Field = forwardRef<HTMLInputElement, IField>(
 	({ placeholder, error, type = 'text', style, ...rest }, ref) => {
 		return (
 			<div className={cn(styles.common, styles.field)} style={style}>
@@ -19,5 +19,3 @@ const Field = forwardRef<HTMLInputElement, IField>(
 )
 
 Field.displayName = 'Field'
-
-export default Field

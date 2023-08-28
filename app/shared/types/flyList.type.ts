@@ -1,27 +1,37 @@
+import { IUser } from './user.types'
 import { IWallet } from './wallet.type'
 
 export interface IFlyLists {
-	id: string
+	id: number
 	name: string
-	coin: ICoin
-	wallet: IWallet
-	pull: IPull
+	extendedConfig: string
 	miner: IMiner
-	isActive: boolean
+	wallet: IWallet
+	pool: IPool
+	user: IUser
 }
 
 export interface IMiner {
-	id: string
+	id: number
 	name: string
+	minerInfo: string
 }
 
-export interface ICoin {
-	id: string
+export interface IPool {
+	id: number
 	name: string
-	icon?: string
+	poolAddresses: IPoolAddress[]
 }
 
-export interface IPull {
-	id: string
+export interface IPoolAddress {
+	id: number
+	address: string
+}
+
+export interface IFlyListsForm {
 	name: string
+	extendedConfig: string
+	miner: string
+	wallet: string
+	pool: string
 }

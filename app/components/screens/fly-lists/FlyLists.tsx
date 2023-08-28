@@ -2,89 +2,101 @@ import { nanoid } from '@reduxjs/toolkit'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
+import { toast } from 'react-toastify'
 
-import { Button } from '@/components/ui/Button/Button'
-import { MaterialIcon } from '@/components/ui/icons/MaterialIcon'
+import {
+	Button,
+	Heading,
+	Loader,
+	MaterialIcon,
+	SubHeading,
+} from '@/components/ui'
 
 import { IFlyLists } from '@/shared/types/flyList.type'
 
-import styles from './FlyLists.module.scss'
-import { FlyListsArr } from './data'
+import { FlightSheetsService } from '@/services/index'
 
-const FlyList: FC = () => {
-	const [activeFlyList, setActiveFlyList] = useState<IFlyLists | null>(null)
-	const [noActiveFlyList, setNoActiveFlyList] = useState<IFlyLists[]>([])
-	const [flyList, setFlyList] = useState<IFlyLists[]>(FlyListsArr)
+import styles from './FlyLists.module.scss'
+
+const FlyListScreen: FC = () => {
+	const [flyList, setFlyList] = useState<IFlyLists[]>([])
+	const [isLoad, setIsLoad] = useState<boolean>(true)
 
 	const { push } = useRouter()
 
 	useEffect(() => {
-		setActiveFlyList(flyList.filter((item) => item.isActive)[0])
-		setNoActiveFlyList(flyList.filter((item) => !item.isActive))
+		const getData = async () => {
+			const flyList = await FlightSheetsService.getAll()
+
+			setFlyList(flyList)
+			setIsLoad(false)
+		}
+
+		getData()
 	}, [])
+
+	const deleteById = (id: number) => async () => {
+		const { status } = await FlightSheetsService.deleteById(id)
+
+		if (status === 200) {
+			const flyList = await FlightSheetsService.getAll()
+
+			setFlyList(flyList)
+			toast.success('Полетный лист успешно удален')
+		}
+	}
 
 	return (
 		<div className={styles.flyLists}>
-			<h1>Мои полетные листы</h1>
-			<div className={styles.active}>
+			{isLoad ? (
+				<Loader />
+			) : (
 				<>
-					<h2 style={{ color: 'var(--green)' }}>Активный полетный лист</h2>
-					{activeFlyList ? (
-						<div className={styles.content}>
-							<div className={styles.info}>
-								<p>Название: {activeFlyList.name}</p>
-								<p>Майнер: {activeFlyList.miner.name}</p>
-								<p>Монета: {activeFlyList.coin.name}</p>
-								<p>Пулл: {activeFlyList.pull.name}</p>
-							</div>
-							<div className={styles.btns}>
-								<MaterialIcon
-									name="MdEditSquare"
-									size={35}
-									className={styles.edit}
-									onClick={() => push(`/fly-lists/edit/${activeFlyList.id}`)}
-								/>
-								<BsTrash size={35} className={styles.trash} />
-							</div>
+					<Heading title="Мои полетные листы" />
+					{flyList.length ? (
+						<div className={styles.items}>
+							{flyList?.map((item) => (
+								<div className={styles.content} key={nanoid()}>
+									<div className={styles.info}>
+										<p>Название: {item?.name}</p>
+										<p>Майнер: {item?.miner.name}</p>
+										<p>Монета: {item?.wallet.currency.name}</p>
+										<p>Пулл: {item?.pool?.name}</p>
+									</div>
+									<div className={styles.btns}>
+										<MaterialIcon name="MdRocketLaunch" size={35} />
+										<MaterialIcon
+											name="MdEditSquare"
+											size={35}
+											className={styles.edit}
+											onClick={() => push(`/fly-lists/edit/${item.id}`)}
+										/>
+										<BsTrash
+											size={35}
+											className={styles.trash}
+											onClick={deleteById(item.id)}
+										/>
+									</div>
+								</div>
+							))}
 						</div>
 					) : (
-						<p>Активного полетного листа нету</p>
+						<div className={styles.noItems}>
+							<SubHeading title="Нет полетных листов" />
+						</div>
 					)}
+					<Button
+						appearance="white"
+						hover="green"
+						onClick={() => push('/fly-lists/new')}
+						style={{ margin: '1rem auto 0.5rem auto', display: 'block' }}
+					>
+						Добавить новый полетный лист
+					</Button>
 				</>
-			</div>
-			<h2 style={{ marginBottom: 10 }}>Не активные полетные листы</h2>
-			<div className={styles.noActive}>
-				{noActiveFlyList.map((item) => (
-					<div className={styles.content} key={nanoid()}>
-						<div className={styles.info}>
-							<p>Название: {item.name}</p>
-							<p>Майнер: {item.miner.name}</p>
-							<p>Монета: {item.coin.name}</p>
-							<p>Пулл: {item.pull.name}</p>
-						</div>
-						<div className={styles.btns}>
-							<MaterialIcon name="MdRocketLaunch" size={35} />
-							<MaterialIcon
-								name="MdEditSquare"
-								size={35}
-								className={styles.edit}
-								onClick={() => push(`/fly-lists/edit/${item.id}`)}
-							/>
-							<BsTrash size={35} className={styles.trash} />
-						</div>
-					</div>
-				))}
-			</div>
-			<Button
-				appearance="white"
-				hover="green"
-				onClick={() => push('/fly-lists/new')}
-				style={{ margin: '1rem auto 0.5rem auto', display: 'block' }}
-			>
-				Добавить новый полетный лист
-			</Button>
+			)}
 		</div>
 	)
 }
 
-export default FlyList
+export default FlyListScreen

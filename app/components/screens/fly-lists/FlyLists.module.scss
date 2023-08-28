@@ -8,22 +8,7 @@
 		text-align: center;
 	}
 
-	.active {
-		width: 45%;
-		margin-bottom: 10px;
-
-		> h2 {
-			margin-bottom: 10px;
-		}
-
-		.content {
-			display: flex;
-			justify-content: space-between;
-			gap: 20px;
-		}
-	}
-
-	.noActive {
+	.items {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;

@@ -9,6 +9,10 @@
 		margin-bottom: 10px;
 		text-align: center;
 	}
+
+	&.isLoad {
+		padding: 0 !important;
+	}
 }
 
 .wallets {

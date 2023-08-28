@@ -11,8 +11,6 @@ export const useAuthRedirect = () => {
 	const redirect = query.redirect ? String(query.redirect) : '/'
 
 	useEffect(() => {
-		console.log(token, redirect)
-
 		if (token) push(redirect)
 	}, [token, redirect, push])
 }

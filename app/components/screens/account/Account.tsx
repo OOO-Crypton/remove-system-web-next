@@ -1,12 +1,11 @@
 import cn from 'clsx'
 import { FC, useState } from 'react'
 
-import { Button } from '@/components/ui/Button/Button'
-import { Input } from '@/components/ui/Input/Input'
+import { Button, Input } from '@/components/ui/'
 
 import styles from './Account.module.scss'
 
-const Account: FC = () => {
+const AccountScreen: FC = () => {
 	const [isEdit, setIsEdit] = useState<boolean>(false)
 
 	const saveInfoUser = () => {
@@ -69,4 +68,4 @@ const Account: FC = () => {
 	)
 }
 
-export default Account
+export default AccountScreen

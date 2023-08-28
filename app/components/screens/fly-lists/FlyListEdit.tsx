@@ -1,19 +1,43 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { FC, useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import Select from 'react-select'
 
-import { Button } from '@/components/ui/Button/Button'
-import { Input } from '@/components/ui/Input/Input'
-import { Select } from '@/components/ui/Select/Select'
+import { Button, Input, Loader } from '@/components/ui'
 
-import { IFlyLists } from '@/shared/types/flyList.type'
+import { IFlyLists, IMiner, IPool } from '@/shared/types/flyList.type'
+import { IWallet } from '@/shared/types/wallet.type'
+
+import { FlightSheetsService, WalletsService } from '@/services/index'
+
+import { SelectMyStyles } from '@/configs/stylesSelect.config'
 
 import styles from './FlyLists.module.scss'
-import { FlyListsArr } from './data'
 
-const FlyListEdit: FC<{ id: string }> = ({ id }) => {
-	const flyList: IFlyLists = FlyListsArr.filter((item) => item.id === id)[0]
+const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
+	const [flyList, setFlyList] = useState<IFlyLists>()
+	const [wallet, setWallet] = useState<IWallet[]>([])
+	const [pool, setPool] = useState<IPool[]>([])
+	const [minerList, setMinerList] = useState<IMiner[]>([])
+	const [isLoad, setIsLoad] = useState<boolean>(true)
 
-	const { register, handleSubmit } = useForm<IFlyLists>({
+	useEffect(() => {
+		const getData = async () => {
+			const flyList = await FlightSheetsService.getById(id)
+			const wallet = await WalletsService.getAll()
+			const pool = await FlightSheetsService.getPoolList()
+			const minerList = await FlightSheetsService.getMinerList()
+
+			setFlyList(flyList)
+			setWallet(wallet)
+			setPool(pool)
+			setMinerList(minerList)
+			setIsLoad(false)
+		}
+
+		getData()
+	}, [id])
+
+	const { register, handleSubmit, control, setValue } = useForm<IFlyLists>({
 		mode: 'onBlur',
 	})
 
@@ -21,9 +45,14 @@ const FlyListEdit: FC<{ id: string }> = ({ id }) => {
 		console.log(value)
 	})
 
-	return (
+	const handleCategoryInputChange = (name: any, newValue: any) =>
+		setValue(name, newValue.value)
+
+	return isLoad ? (
+		<Loader />
+	) : (
 		<div className={styles.flyList}>
-			<h1>Изменение полетного листа №{flyList.id}</h1>
+			<h1>Изменение полетного листа №{flyList!.id}</h1>
 			<form onSubmit={submit}>
 				<label htmlFor="name">
 					Название
@@ -33,59 +62,80 @@ const FlyListEdit: FC<{ id: string }> = ({ id }) => {
 							required: true,
 						})}
 						required
-						defaultValue={flyList.name}
+						defaultValue={flyList!.name}
 						placeholder="Введите назавние"
-					/>
-				</label>
-				<label htmlFor="coin">
-					Монета
-					<Select
-						id="coin"
-						required
-						{...register('coin', {
-							required: true,
-						})}
-						options={[
-							{ label: 'coin 1', value: 1 },
-							{ label: 'coin ', value: 0 },
-						]}
-						selected={{ label: flyList.coin.name, disabled: false }}
 					/>
 				</label>
 				<label htmlFor="wallet">
 					Кошелек
-					<Select
-						id="wallet"
-						required
-						{...register('wallet', {
-							required: true,
-						})}
-						options={[{ label: 'wallet', value: 1 }]}
-						selected={{ label: flyList.wallet.name, disabled: false }}
+					<Controller
+						control={control}
+						name="wallet"
+						render={({ field: { ref } }) => (
+							<Select
+								id="wallet"
+								ref={ref}
+								onChange={(value) => handleCategoryInputChange('wallet', value)}
+								defaultValue={{
+									value: flyList?.wallet.id,
+									label: flyList?.wallet.name,
+								}}
+								options={wallet.map((item) => ({
+									value: item.id,
+									label: item.name,
+								}))}
+								styles={SelectMyStyles}
+								required
+							/>
+						)}
 					/>
 				</label>
-				<label htmlFor="pull">
+				<label htmlFor="pool">
 					Пулл
-					<Select
-						id="pull"
-						required
-						{...register('pull', {
-							required: true,
-						})}
-						options={[{ label: 'pull', value: 1 }]}
-						selected={{ label: flyList.pull.name, disabled: false }}
+					<Controller
+						control={control}
+						name="pool"
+						render={({ field: { ref } }) => (
+							<Select
+								id="pool"
+								ref={ref}
+								onChange={(value) => handleCategoryInputChange('pool', value)}
+								defaultValue={{
+									value: flyList?.pool.id,
+									label: flyList?.pool.name,
+								}}
+								options={pool.map((item) => ({
+									value: item.id,
+									label: item.name,
+								}))}
+								styles={SelectMyStyles}
+								required
+							/>
+						)}
 					/>
 				</label>
 				<label htmlFor="miner">
 					Майнер
-					<Select
-						id="miner"
-						required
-						{...register('miner', {
-							required: true,
-						})}
-						options={[{ label: 'miner', value: 1 }]}
-						selected={{ label: flyList.miner.name, disabled: false }}
+					<Controller
+						control={control}
+						name="miner"
+						render={({ field: { ref } }) => (
+							<Select
+								id="miner"
+								ref={ref}
+								onChange={(value) => handleCategoryInputChange('miner', value)}
+								defaultValue={{
+									value: flyList?.miner.id,
+									label: flyList?.miner.name,
+								}}
+								options={minerList.map((item) => ({
+									value: item.id,
+									label: item.name,
+								}))}
+								styles={SelectMyStyles}
+								required
+							/>
+						)}
 					/>
 				</label>
 				<Button appearance="white" hover="green">
@@ -96,4 +146,4 @@ const FlyListEdit: FC<{ id: string }> = ({ id }) => {
 	)
 }
 
-export default FlyListEdit
+export default FlyListEditScreen

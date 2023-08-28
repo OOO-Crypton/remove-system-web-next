@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 
-import { Button } from '@/components/ui/Button/Button'
-import { LoaderSmall } from '@/components/ui/Loader/Loader'
+import { Button, LoaderSmall } from '@/components/ui'
 
 import styles from './FarmNew.module.scss'
 
 export type TypeCase = 'download' | 'add' | 'finally'
 
-const FarmNew: FC = () => {
+const FarmNewScreen: FC = () => {
 	const [type, setType] = useState<TypeCase>('download')
 
 	useEffect(() => {
@@ -201,4 +200,4 @@ const FarmNew: FC = () => {
 	return <div className={styles.addFarm}>{body()}</div>
 }
 
-export default FarmNew
+export default FarmNewScreen

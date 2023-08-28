@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserToken {
 	'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': string
 	UserId: string
 	jti: string
@@ -8,4 +8,11 @@ export interface IUser {
 	exp: number
 	iss: string
 	aud: string
+}
+
+export interface IUser {
+	id: string
+	userName: string
+	email: string
+	phoneNumber: string
 }

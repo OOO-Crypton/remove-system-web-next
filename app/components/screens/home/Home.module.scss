@@ -1,27 +1,2 @@
 .home {
-    padding: 2rem;
-    background-color: var(--light-dark);
-    border-radius: 1rem;
-  
-    > h1 {
-      margin-bottom: 10px;
-      text-align: center;
-    }
-  
-    .item {
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid var(--white);
-  
-      .info {
-        display: flex;
-        justify-content: space-between;
-      }
-  
-      &:hover {
-        cursor: pointer;
-        background-color: var(--dark);
-      }
-    }
-  }
-  
+}
