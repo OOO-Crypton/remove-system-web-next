@@ -10,7 +10,7 @@ import styles from './Farm.module.scss'
 import { HomeData } from './data'
 
 const FarmScreen: FC = () => {
-	const rouster = useRouter()
+	const router = useRouter()
 
 	return (
 		<Meta title="Home">
@@ -20,7 +20,7 @@ const FarmScreen: FC = () => {
 					<div
 						className={styles.item}
 						key={nanoid()}
-						onClick={() => rouster.push(`/farms/${farm.id}`)}
+						onClick={() => router.push(`/farms/${farm.id}`)}
 					>
 						<p>Ферма №{idx + 1}</p>
 						<div className={styles.info}>
@@ -36,7 +36,7 @@ const FarmScreen: FC = () => {
 					appearance="white"
 					hover="green"
 					style={{ margin: '1rem auto 0.5rem auto', display: 'block' }}
-					onClick={() => rouster.push('/farms/new')}
+					onClick={() => router.push('/farms/new')}
 				>
 					Добавить новую ферму
 				</Button>

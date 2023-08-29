@@ -61,7 +61,7 @@ const FlyListScreen: FC = () => {
 										<p>Название: {item?.name}</p>
 										<p>Майнер: {item?.miner.name}</p>
 										<p>Монета: {item?.wallet.currency.name}</p>
-										<p>Пулл: {item?.pool?.name}</p>
+										<p>Пул: {item?.pool?.name}</p>
 									</div>
 									<div className={styles.btns}>
 										<MaterialIcon name="MdRocketLaunch" size={35} />

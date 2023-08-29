@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { Button, Heading, Input, Loader } from '@/components/ui'
 
-import { IFlyListsForm } from '@/shared/types/flyList.type'
+import { IFlyListsForm, IMiner, IPool } from '@/shared/types/flyList.type'
 import { IWallet } from '@/shared/types/wallet.type'
 
 import { FlightSheetsService, WalletsService } from '@/services/index'
@@ -17,6 +17,8 @@ import styles from './FlyLists.module.scss'
 
 const FlyListNewScreen = () => {
 	const [wallet, setWallet] = useState<IWallet[]>()
+	const [pool, setPool] = useState<IPool[]>()
+	const [miner, setMiner] = useState<IMiner[]>()
 	const [isLoad, setIsLoad] = useState<boolean>(true)
 
 	const { push } = useRouter()
@@ -24,8 +26,11 @@ const FlyListNewScreen = () => {
 	useEffect(() => {
 		const getData = async () => {
 			const wallet = await WalletsService.getAll()
-
+			const pool = await FlightSheetsService.getPoolList()
+			const miner = await FlightSheetsService.getMinerList()
 			setWallet(wallet)
+			setPool(pool)
+			setMiner(miner)
 			setIsLoad(false)
 		}
 
@@ -64,7 +69,7 @@ const FlyListNewScreen = () => {
 									required: true,
 								})}
 								required
-								placeholder="Введите назавние"
+								placeholder="Введите название"
 							/>
 						</label>
 						<label htmlFor="wallet">
@@ -90,7 +95,7 @@ const FlyListNewScreen = () => {
 							/>
 						</label>
 						<label htmlFor="pool">
-							Пулл
+							Пул
 							<Controller
 								control={control}
 								name="pool"
@@ -101,7 +106,10 @@ const FlyListNewScreen = () => {
 										onChange={(value) =>
 											handleCategoryInputChange('pool', value)
 										}
-										options={[{ label: 'pull', value: 1 }]}
+										options={pool?.map((item) => ({
+											value: item.id,
+											label: item.name,
+										}))}
 										styles={SelectMyStyles}
 										required
 									/>
@@ -120,7 +128,10 @@ const FlyListNewScreen = () => {
 										onChange={(value) =>
 											handleCategoryInputChange('miner', value)
 										}
-										options={[{ label: 'miner', value: 1 }]}
+										options={miner?.map((item) => ({
+											value: item.id,
+											label: item.name,
+										}))}
 										styles={SelectMyStyles}
 										required
 									/>
