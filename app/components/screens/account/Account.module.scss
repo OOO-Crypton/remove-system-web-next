@@ -1,8 +1,19 @@
 .user {
+	@apply flex flex-wrap gap-5 justify-center;
+
 	.block {
-		padding: 2rem;
+		@apply p-6 rounded-xl;
 		background-color: var(--light-dark);
-		border-radius: 1rem;
+
+		&.button {
+			@apply flex flex-row flex-wrap gap-2;
+			width: 380px;
+
+			> button {
+				width: 160px;
+				height: 62px;
+			}
+		}
 	}
 	.info {
 		display: flex;
@@ -31,5 +42,28 @@
 	.user {
 		display: flex;
 		flex-direction: column;
+	}
+}
+
+.modal {
+	@apply p-3 border rounded-xl;
+	background-color: var(--light-dark);
+
+	.header {
+		@apply flex justify-between;
+
+		> h2 {
+			@apply m-auto;
+		}
+
+		> svg {
+			@apply cursor-pointer fill-white;
+		}
+	}
+
+	.main {
+		> p {
+			@apply text-black;
+		}
 	}
 }
