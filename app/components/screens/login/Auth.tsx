@@ -37,7 +37,7 @@ const AuthScreen: FC = () => {
 			<form onSubmit={handleSubmit(onSubmit)} className={styles.auth}>
 				<Field
 					{...register('email', {
-						required: 'Логин обезательный!',
+						required: 'Логин обязательный!',
 					})}
 					placeholder="Логин"
 					error={errors.email}
@@ -45,7 +45,7 @@ const AuthScreen: FC = () => {
 				/>
 				<Field
 					{...register('password', {
-						required: 'Пароль обезательный!',
+						required: 'Пароль обязательный!',
 					})}
 					type="password"
 					placeholder="Пароль"
