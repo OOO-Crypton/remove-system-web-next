@@ -1,9 +1,9 @@
 import { GetStaticProps, NextPage } from 'next'
 
-import Home from '@/screens/home/Home'
+import RegisterScreen from '@/components/screens/register/Register'
 
-const HomePage: NextPage = () => {
-	return <Home />
+const RegisterPage: NextPage = () => {
+	return <RegisterScreen />
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -20,4 +20,4 @@ export const getStaticProps: GetStaticProps = async () => {
 	}
 }
 
-export default HomePage
+export default RegisterPage

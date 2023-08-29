@@ -16,3 +16,9 @@ export interface IUser {
 	email: string
 	phoneNumber: string
 }
+
+export interface IUserForm {
+	userName: string
+	email: string
+	phoneNumber: number
+}

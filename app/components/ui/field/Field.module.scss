@@ -21,10 +21,12 @@
 		height: 38px;
 		outline: none;
 		padding: 0 10px;
-		width: 100%;
+		color: var(--dark);
 	}
-}
 
-.error {
-	@apply text-sm w-full text-primary;
+	&.error {
+		> p {
+			@apply text-sm w-full text-primary;
+		}
+	}
 }

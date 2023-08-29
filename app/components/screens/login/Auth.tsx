@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { Button, Field } from '@/components/ui'
+import { Button, Field, Heading } from '@/components/ui'
 
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
@@ -35,11 +35,12 @@ const AuthScreen: FC = () => {
 	return (
 		<Meta title="Авторизация">
 			<form onSubmit={handleSubmit(onSubmit)} className={styles.auth}>
+				<Heading title="Авторизация" />
 				<Field
 					{...register('email', {
 						required: 'Логин обязательный!',
 					})}
-					placeholder="Логин"
+					placeholder="Почта"
 					error={errors.email}
 					disabled={isLoading}
 				/>

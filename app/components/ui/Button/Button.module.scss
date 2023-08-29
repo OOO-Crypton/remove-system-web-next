@@ -1,49 +1,49 @@
 .button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.15s ease-in-out;
 
-  &.white {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-  }
+	&.white {
+		background: transparent;
+		color: var(--white);
+		border: 2px solid var(--white);
+	}
 
-  &.green {
-    background: var(--green);
-    color: var(--dark);
-  }
+	&.green {
+		background: var(--green);
+		color: var(--white);
+	}
 
-  &.red {
-    background: var(--white);
-    color: var(--red);
-  }
+	&.red {
+		background: var(--white);
+		color: var(--red);
+	}
 
-  &.hoverGreen:hover {
-    background: var(--green);
-    color: var(--white);
-    border: 2px solid var(--green);
-  }
+	&.hoverGreen:hover {
+		background: var(--green);
+		color: var(--white);
+		border: 2px solid var(--green);
+	}
 
-  &.hoverGreen:active {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(9, 190, 139, 0.5);
-  }
+	&.hoverGreen:active {
+		outline: 0;
+		box-shadow: 0 0 0 0.2rem rgba(9, 190, 139, 0.5);
+	}
 
-  &.hoverRed:hover {
-    color: var(--white);
-    background: var(--red);
-    border: 2px solid var(--red);
-  }
+	&.hoverRed:hover {
+		color: var(--white);
+		background: var(--red);
+		border: 2px solid var(--red);
+	}
 
-  &.hoverRed:active {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
-  }
+	&.hoverRed:active {
+		outline: 0;
+		box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
+	}
 
-  &:hover {
-    transform: scale(1.03);
-  }
+	&:hover {
+		transform: scale(1.03);
+	}
 }
