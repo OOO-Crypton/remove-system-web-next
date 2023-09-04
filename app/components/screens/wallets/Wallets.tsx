@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
 
-import { Button, Loader, MaterialIcon } from '@/components/ui'
+import { Button, Loader, MaterialIcon, SubHeading } from '@/components/ui'
 
 import { IWallet } from '@/shared/types/wallet.type'
 
@@ -73,7 +73,9 @@ const WalletsScreen: FC = () => {
 								</div>
 							))
 						) : (
-							<div>Кошельков нет</div>
+							<div className={styles.noItems}>
+								<SubHeading title="Кошельков нет" />
+							</div>
 						)}
 					</div>
 					<Button

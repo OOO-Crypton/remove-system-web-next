@@ -5,34 +5,69 @@
 		@apply p-6 rounded-xl;
 		background-color: var(--light-dark);
 
+		&.info {
+			.list > .list__item {
+				margin-bottom: 10px;
+
+				.param {
+					@apply flex justify-between;
+					line-height: 1.4;
+
+					.param__prop {
+						position: relative;
+						display: block;
+						overflow: hidden;
+						width: 100%;
+					}
+
+					.param__prop:after {
+						content: '';
+						position: absolute;
+						margin-left: 0.3em;
+						bottom: 0.35em;
+						width: 100%;
+						border-bottom: 0.1em dotted;
+					}
+
+					.param__value {
+						padding-left: 0.2em;
+					}
+				}
+			}
+		}
+
 		&.button {
-			@apply flex flex-row flex-wrap gap-2;
-			width: 380px;
+			@apply flex flex-row flex-wrap gap-4;
+			width: 384px;
 
 			> button {
 				width: 160px;
 				height: 62px;
 			}
-		}
-	}
-	.info {
-		display: flex;
-		flex-direction: column;
-		label {
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-			input {
-				margin-bottom: 10px;
-			}
-		}
 
-		.btnBlock {
-			margin: 0 auto;
-			button {
-				min-width: 120px;
-				max-width: 250px;
-				margin-right: 10px;
+			// @media (max-width: 1000px) {
+			// 	flex-wrap: nowrap !important;
+			// }
+
+			@media (min-width: 730px) and (max-width: 1000px) {
+				flex-wrap: nowrap;
+			}
+
+			@media (max-width: 730px) {
+				display: grid;
+				grid-template-columns: auto auto;
+
+				> button {
+					max-width: 200px;
+					min-width: 120px;
+					height: auto;
+				}
+			}
+
+			@media (max-width: 415px) {
+				> button {
+					@apply w-full;
+				}
 			}
 		}
 	}
@@ -42,6 +77,12 @@
 	.user {
 		display: flex;
 		flex-direction: column;
+
+		.block {
+			&.button {
+				@apply w-full justify-between;
+			}
+		}
 	}
 }
 

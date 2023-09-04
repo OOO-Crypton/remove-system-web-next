@@ -66,17 +66,28 @@ const AccountScreen: FC = () => {
 
 	return (
 		<div className={styles.user}>
-			<div className={styles.block}>
+			<div className={cn(styles.block, styles.info)}>
 				<SubHeading title="Информация о пользователе" />
-				<p>
-					Имя: <span>{user?.userName}</span>
-				</p>
-				<p>
-					Почта: <span>{user?.email}</span>
-				</p>
-				<p>
-					Номер телефона: <span>{user?.phoneNumber}</span>
-				</p>
+				<ul className={styles.list}>
+					<li className={styles.list__item}>
+						<div className={styles.param}>
+							<span className={styles.param__prop}>Имя:</span>
+							<span className={styles.param__value}>{user?.userName}</span>
+						</div>
+					</li>
+					<li className={styles.list__item}>
+						<div className={styles.param}>
+							<span className={styles.param__prop}>Почта:</span>
+							<span className={styles.param__value}>{user?.email}</span>
+						</div>
+					</li>
+					<li className={styles.list__item}>
+						<div className={styles.param}>
+							<span className={styles.param__prop}>Номер телефона:</span>
+							<span className={styles.param__value}>{user?.phoneNumber}</span>
+						</div>
+					</li>
+				</ul>
 			</div>
 			<div className={cn(styles.block, styles.button)}>
 				<Button
