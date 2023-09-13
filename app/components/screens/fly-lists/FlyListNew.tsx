@@ -89,6 +89,7 @@ const FlyListNewScreen = () => {
 											label: item.name,
 										}))}
 										styles={SelectMyStyles}
+										placeholder="Выберите кошелек"
 										required
 									/>
 								)}
@@ -96,24 +97,13 @@ const FlyListNewScreen = () => {
 						</label>
 						<label htmlFor="pool">
 							Пул
-							<Controller
-								control={control}
-								name="pool"
-								render={({ field: { ref } }) => (
-									<Select
-										id="pool"
-										ref={ref}
-										onChange={(value) =>
-											handleCategoryInputChange('pool', value)
-										}
-										options={pool?.map((item) => ({
-											value: item.id,
-											label: item.name,
-										}))}
-										styles={SelectMyStyles}
-										required
-									/>
-								)}
+							<Input
+								type="text"
+								{...register('pool', {
+									required: true,
+								})}
+								required
+								placeholder="Введите пул"
 							/>
 						</label>
 						<label htmlFor="miner">
@@ -133,6 +123,7 @@ const FlyListNewScreen = () => {
 											label: item.name,
 										}))}
 										styles={SelectMyStyles}
+										placeholder="Выберите майнер"
 										required
 									/>
 								)}

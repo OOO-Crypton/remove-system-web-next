@@ -1,29 +1,30 @@
 .dataDiv {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-items: center;
+	margin: 20px;
+	gap: 10px;
 
-  .div {
-    display: flex;
-    gap: 0.5rem;
-    width: 150px;
-    border-radius: 15px;
-    background-color: var(--light-dark);
-    padding: 1rem;
-    text-align: center;
-    flex-direction: column;
+	.div {
+		display: flex;
+		gap: 0.5rem;
+		width: 150px;
+		border-radius: 15px;
+		background-color: var(--light-dark);
+		padding: 1rem;
+		text-align: center;
+		flex-direction: column;
 
-    .dataText {
-      font-size: 18px;
-      text-align: center;
-    }
+		.dataText {
+			font-size: 18px;
+			text-align: center;
+		}
 
-    &:hover p {
-      color: var(--green);
-      cursor: pointer;
-      transition: all 0.3s ease-in;
-    }
-  }
+		&:hover p {
+			color: var(--green);
+			cursor: pointer;
+			transition: all 0.3s ease-in;
+		}
+	}
 }

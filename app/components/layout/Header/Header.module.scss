@@ -1,41 +1,69 @@
-.header {
-	padding: 10px 75px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+.sidebar {
+	@apply flex flex-row items-center p-6;
 
-	.topmenu {
-		width: 100%;
-		display: flex;
-		justify-content: center;
+	.content {
+		@apply w-full flex justify-between;
+		max-width: 1920px;
 
-		a {
-			text-decoration: none;
-			display: block;
-			transition: 0.4s ease-in-out;
+		> nav > ul {
+			@apply flex-wrap flex justify-center;
+
+			a {
+				text-decoration: none;
+				display: block;
+				transition: 0.4s ease-in-out;
+			}
+
+			> li {
+				@apply relative;
+
+				&:after {
+					@apply absolute right-0;
+					content: '';
+					width: 1px;
+					height: 12px;
+					background: #d2d2d2;
+					top: 15px;
+					box-shadow: 4px -2px 0 #d2d2d2;
+					transform: rotate(30deg);
+				}
+
+				&:last-child:after {
+					background: none;
+					box-shadow: none;
+				}
+
+				> a {
+					padding: 10px 20px;
+					color: var(--white);
+					text-transform: uppercase;
+					font-weight: bold;
+					letter-spacing: 1px;
+
+					&:hover {
+						color: var(--green);
+					}
+				}
+			}
 		}
+	}
 
-		> li {
-			position: relative;
+	.sidebarBlock {
+		@apply h-full w-0 fixed top-0 left-0 flex flex-col justify-center items-center;
+		z-index: 1000;
+		background: var(--dark);
+		overflow-x: hidden;
+		transition: 0.5s;
+		padding: 20px 0;
 
-			&:after {
-				content: '';
-				position: absolute;
-				right: 0;
-				width: 1px;
-				height: 12px;
-				background: #d2d2d2;
-				top: 15px;
-				box-shadow: 4px -2px 0 #d2d2d2;
-				transform: rotate(30deg);
+		> nav > ul {
+			a {
+				text-decoration: none;
+				display: block;
+				transition: 0.4s ease-in-out;
 			}
 
-			&:last-child:after {
-				background: none;
-				box-shadow: none;
-			}
-
-			> a {
+			> li a {
 				padding: 10px 20px;
 				color: var(--white);
 				text-transform: uppercase;
@@ -46,6 +74,48 @@
 					color: var(--green);
 				}
 			}
+		}
+
+		.closeBtn {
+			@apply fill-white cursor-pointer absolute;
+			right: 25px;
+			top: 25px;
+			font-size: 36px;
+		}
+	}
+
+	.openbtn {
+		@apply cursor-pointer text-white border-0;
+		background-color: transparent;
+		margin-left: 20px;
+	}
+
+	@media (max-width: 900px) {
+		.content {
+			grid-template-columns: 1fr 150px 1fr;
+		}
+	}
+
+	@media (min-width: 1000px) {
+		.sidebarBlock,
+		.openbtn {
+			display: none;
+		}
+	}
+
+	@media (max-width: 1000px) {
+		.content {
+			display: none;
+		}
+
+		.nav {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 1260px) {
+		.content {
+			color: #fff;
 		}
 	}
 }

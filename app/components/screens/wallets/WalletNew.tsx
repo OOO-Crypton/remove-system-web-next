@@ -38,14 +38,12 @@ const WalletNewScreen: FC = () => {
 	})
 
 	const onSubmit: SubmitHandler<IWalletForm> = async (body) => {
-		console.log(body)
+		const status = await WalletsService.create(body)
 
-		// const status = await WalletsService.create(body)
-
-		// if (status === 200) {
-		// 	toast.success('Кошелёк добавлен')
-		// 	push('/wallets')
-		// }
+		if (status === 200) {
+			toast.success('Кошелёк добавлен')
+			push('/wallets')
+		}
 	}
 
 	const handleCategoryInputChange = (name: any, newValue: any) =>

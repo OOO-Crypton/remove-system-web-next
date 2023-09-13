@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
 
-import { Button, Loader, MaterialIcon } from '@/components/ui'
+import { Button, Loader, MaterialIcon, SubHeading } from '@/components/ui'
 
 import { IWallet } from '@/shared/types/wallet.type'
 
@@ -55,17 +55,16 @@ const WalletsScreen: FC = () => {
 									<div className={styles.info}>
 										<p>Название: {wallet.name}</p>
 										<p>Монета: {wallet.currency?.name}</p>
-										<p>Адресс: {wallet.address}</p>
 									</div>
 									<div className={styles.svg}>
 										<MaterialIcon
 											name="MdEditSquare"
-											size={35}
+											size={30}
 											className={styles.edit}
 											onClick={() => push(`/wallets/edit/${wallet.id}`)}
 										/>
 										<BsTrash
-											size={35}
+											size={30}
 											className={styles.trash}
 											onClick={deleteById(wallet.id)}
 										/>
@@ -73,7 +72,9 @@ const WalletsScreen: FC = () => {
 								</div>
 							))
 						) : (
-							<div>Кошельков нет</div>
+							<div className={styles.noItems}>
+								<SubHeading title="Кошельков нет" />
+							</div>
 						)}
 					</div>
 					<Button
