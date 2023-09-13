@@ -55,17 +55,16 @@ const WalletsScreen: FC = () => {
 									<div className={styles.info}>
 										<p>Название: {wallet.name}</p>
 										<p>Монета: {wallet.currency?.name}</p>
-										<p>Адресс: {wallet.address}</p>
 									</div>
 									<div className={styles.svg}>
 										<MaterialIcon
 											name="MdEditSquare"
-											size={35}
+											size={30}
 											className={styles.edit}
 											onClick={() => push(`/wallets/edit/${wallet.id}`)}
 										/>
 										<BsTrash
-											size={35}
+											size={30}
 											className={styles.trash}
 											onClick={deleteById(wallet.id)}
 										/>

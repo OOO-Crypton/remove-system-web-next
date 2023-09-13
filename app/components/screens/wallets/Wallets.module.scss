@@ -6,8 +6,7 @@
 	border-radius: 1rem;
 
 	> h1 {
-		margin-bottom: 10px;
-		text-align: center;
+		@apply text-center mb-5;
 	}
 
 	&.isLoad {
@@ -17,16 +16,11 @@
 
 .wallets {
 	.items {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		gap: 15px;
+		@apply flex flex-col justify-between gap-4;
 
 		.item {
-			display: flex;
-			justify-content: space-between;
-			width: 49%;
-			padding: 10px 0;
+			@apply flex justify-between items-center pb-4 mb-4;
+			border-bottom: 1px solid #fff;
 		}
 	}
 
