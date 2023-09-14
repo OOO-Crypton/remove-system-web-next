@@ -9,7 +9,7 @@ import { IFarm } from '@/shared/types/farm.types'
 import styles from './FarmId.module.scss'
 import { HomeData } from './data'
 
-const FarmIdScreen: FC<{ id: string }> = ({ id }) => {
+const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 	const farm: IFarm = HomeData.filter((item) => item.id === id)[0]
 
 	return (
@@ -20,16 +20,16 @@ const FarmIdScreen: FC<{ id: string }> = ({ id }) => {
 					<h2>Информация о системе</h2>
 					<div className={styles.sysInfoDesc}>
 						<p>
-							Материнская плата: <span>{farm.motherboard}</span>
+							Материнская плата: <span>{farm.systemInfo}</span>
 						</p>
 						<p>
-							CPU: <span>{farm.cpu}</span>
+							CPU: <span>{farm.systemInfo}</span>
 						</p>
 						<p>
-							Версия ОС: <span>{farm.version}</span>
+							Версия ОС: <span>{farm.systemInfo}</span>
 						</p>
 						<p>
-							IP-адрес: <span>{farm.ipAddress}</span>
+							IP-адрес: <span>{farm.systemInfo}</span>
 						</p>
 					</div>
 				</div>
@@ -46,7 +46,7 @@ const FarmIdScreen: FC<{ id: string }> = ({ id }) => {
 				</div>
 			</div>
 			<div className={styles.gpuTableWrapper}>
-				<table className={styles.gpuTable}>
+				{/* <table className={styles.gpuTable}>
 					<thead>
 						<tr>
 							<th></th>
@@ -85,7 +85,7 @@ const FarmIdScreen: FC<{ id: string }> = ({ id }) => {
 							</tr>
 						))}
 					</tbody>
-				</table>
+				</table> */}
 			</div>
 		</div>
 	)

@@ -24,12 +24,12 @@ const FarmScreen: FC = () => {
 					>
 						<p>Ферма №{idx + 1}</p>
 						<div className={styles.info}>
-							<p>Кол-во GPU: {farm.gpus.length}</p>
-							<p>Потребление: {farm.consumptionAll}</p>
-							<p>Хешрейт: {farm.hashrateAll}</p>
-							<p>CPU: {farm.cpu}</p>
+							<p>Кол-во GPU: {farm.systemInfo}</p>
+							<p>Потребление: {farm.systemInfo}</p>
+							<p>Хешрейт: {farm.systemInfo}</p>
+							<p>CPU: {farm.systemInfo}</p>
 						</div>
-						<p>{farm.type}</p>
+						{/* <p>{farm.type}</p> */}
 					</div>
 				))}
 				<Button

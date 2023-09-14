@@ -2,12 +2,8 @@ import FarmId from '@/components/screens/farm/FarmId'
 
 import { NextPageAuth } from '@/shared/types/auth.types'
 
-const FarmIdPage: NextPageAuth<{ id: string }> = ({ id }) => {
+const FarmIdPage: NextPageAuth<{ id: number }> = ({ id }) => {
 	return <FarmId id={id} />
-}
-
-interface IParams {
-	id: string
 }
 
 export async function getServerSideProps({ params }: any) {
