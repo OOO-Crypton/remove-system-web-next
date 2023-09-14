@@ -11,7 +11,7 @@ export interface IWallet {
 export interface IWalletForm {
 	name: string
 	address: string
-	currency: number
+	currency: string
 }
 
 export interface ICurrency {

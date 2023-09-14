@@ -1,11 +1,6 @@
 import { axiosPrivate } from 'api/axios'
 
-import {
-	IFlyLists,
-	IFlyListsForm,
-	IMiner,
-	IPool,
-} from '@/shared/types/flyList.type'
+import { IFlyLists, IFlyListsForm, IMiner } from '@/shared/types/flyList.type'
 
 import { getFlightSheetsUrl } from '@/configs/api.config'
 
@@ -44,12 +39,6 @@ export const FlightSheetsService = {
 		return data
 	},
 
-	async getPoolList(): Promise<IPool[]> {
-		const { data } = await axiosPrivate.get(getFlightSheetsUrl('pools_list'))
-
-		return data
-	},
-
 	async editById(id: string, body: IFlyListsForm) {
 		const formData = new FormData()
 
@@ -57,8 +46,12 @@ export const FlightSheetsService = {
 		formData.append('ExtendedConfig', body.extendedConfig)
 		formData.append('MinerId', body.miner)
 		formData.append('WalletId', body.wallet)
-		formData.append('PoolId', body.pool)
+		formData.append('PoolAddress', body.pool)
 
-		return await axiosPrivate.post(getFlightSheetsUrl(`${id}/edit`), formData)
+		const { status } = await axiosPrivate.put(
+			getFlightSheetsUrl(`${id}/edit`),
+			formData
+		)
+		return status
 	},
 }

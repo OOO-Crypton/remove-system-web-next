@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { Button, Heading, Input, Loader } from '@/components/ui'
 
-import { IFlyListsForm, IMiner, IPool } from '@/shared/types/flyList.type'
+import { IFlyListsForm, IMiner } from '@/shared/types/flyList.type'
 import { IWallet } from '@/shared/types/wallet.type'
 
 import { FlightSheetsService, WalletsService } from '@/services/index'
@@ -17,7 +17,6 @@ import styles from './FlyLists.module.scss'
 
 const FlyListNewScreen = () => {
 	const [wallet, setWallet] = useState<IWallet[]>()
-	const [pool, setPool] = useState<IPool[]>()
 	const [miner, setMiner] = useState<IMiner[]>()
 	const [isLoad, setIsLoad] = useState<boolean>(true)
 
@@ -26,10 +25,8 @@ const FlyListNewScreen = () => {
 	useEffect(() => {
 		const getData = async () => {
 			const wallet = await WalletsService.getAll()
-			const pool = await FlightSheetsService.getPoolList()
 			const miner = await FlightSheetsService.getMinerList()
 			setWallet(wallet)
-			setPool(pool)
 			setMiner(miner)
 			setIsLoad(false)
 		}

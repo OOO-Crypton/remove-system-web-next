@@ -1,28 +1,24 @@
+import { IMiner } from './flyList.type'
+import { IUser } from './user.types'
+import { IWallet } from './wallet.type'
+
 export interface IFarm {
-	consumptionAll: number
-	hashrateAll: number
-	id: string
-	type: string
-	gpus: IGPU[]
-	cpu: string
-	motherboard: string
-	version: string
-	ipAddress: string
+	id: number
+	systemInfo: string
+	localSystemAddress: string
+	localSystemID: string
+	containerGUID: string
+	user: IUser
+	activeFlightSheet: any
 }
 
-export interface IGPU {
-	id: string
+export interface ActiveFlightSheet {
+	id: number
 	name: string
-	status: EGPUStatus
-	hashrate: number
-	temperature: number
-	fanSpeed: number
-	powerConsumption: number
-	core: number
-	memory: number
-}
-
-export enum EGPUStatus {
-	off = 0,
-	on = 1,
+	extendedConfig: string
+	isActive: boolean
+	miner: IMiner
+	wallet: IWallet
+	poolAddress: string
+	user: IUser
 }

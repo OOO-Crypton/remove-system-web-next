@@ -26,8 +26,10 @@ const FlyListScreen: FC = () => {
 	const [flyList, setFlyList] = useState<IFlyLists[]>([])
 	const [isLoad, setIsLoad] = useState<boolean>(true)
 	const [modalIsOpen, setIsOpen] = useState<boolean>(false)
+	const [modalFlyId, setModalFlyId] = useState<string>('')
 
-	function openModal() {
+	function openModal(id: string) {
+		setModalFlyId(id)
 		setIsOpen(true)
 	}
 
@@ -75,13 +77,13 @@ const FlyListScreen: FC = () => {
 											<p>Название: {item?.name}</p>
 											<p>Майнер: {item?.miner.name}</p>
 											<p>Монета: {item?.wallet.currency.name}</p>
-											<p>Пул: {item?.pool?.name}</p>
+											<p>Пул: {item?.poolAddress}</p>
 										</div>
 										<div className={styles.btns}>
 											<MaterialIcon
 												name="MdRocketLaunch"
 												size={35}
-												onClick={() => openModal()}
+												onClick={() => openModal(item.id.toString())}
 											/>
 											<MaterialIcon
 												name="MdEditSquare"
@@ -120,7 +122,7 @@ const FlyListScreen: FC = () => {
 				ariaHideApp={false}
 				style={modalStyle}
 			>
-				<ModalStartFlyList close={closeModal} />
+				<ModalStartFlyList flyId={modalFlyId} close={closeModal} />
 			</Modal>
 		</>
 	)

@@ -1,10 +1,12 @@
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
+import { toast } from 'react-toastify'
 
 import { Button, Input, Loader } from '@/components/ui'
 
-import { IFlyLists, IMiner, IPool } from '@/shared/types/flyList.type'
+import { IFlyLists, IFlyListsForm, IMiner } from '@/shared/types/flyList.type'
 import { IWallet } from '@/shared/types/wallet.type'
 
 import { FlightSheetsService, WalletsService } from '@/services/index'
@@ -16,20 +18,19 @@ import styles from './FlyLists.module.scss'
 const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 	const [flyList, setFlyList] = useState<IFlyLists>()
 	const [wallet, setWallet] = useState<IWallet[]>([])
-	const [pool, setPool] = useState<IPool[]>([])
 	const [minerList, setMinerList] = useState<IMiner[]>([])
 	const [isLoad, setIsLoad] = useState<boolean>(true)
+
+	const { push } = useRouter()
 
 	useEffect(() => {
 		const getData = async () => {
 			const flyList = await FlightSheetsService.getById(id)
 			const wallet = await WalletsService.getAll()
-			const pool = await FlightSheetsService.getPoolList()
 			const minerList = await FlightSheetsService.getMinerList()
 
 			setFlyList(flyList)
 			setWallet(wallet)
-			setPool(pool)
 			setMinerList(minerList)
 			setIsLoad(false)
 		}
@@ -37,13 +38,24 @@ const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 		getData()
 	}, [id])
 
-	const { register, handleSubmit, control, setValue } = useForm<IFlyLists>({
+	const { register, handleSubmit, control, setValue } = useForm<IFlyListsForm>({
 		mode: 'onBlur',
+		defaultValues: {
+			name: flyList?.name,
+			wallet: flyList?.wallet.id,
+			pool: flyList?.poolAddress,
+			miner: flyList?.miner.id.toString(),
+		},
 	})
 
-	const submit = handleSubmit((value) => {
-		console.log(value)
-	})
+	const onSubmit: SubmitHandler<IFlyListsForm> = async (value) => {
+		const status = await FlightSheetsService.editById(id, value)
+
+		if (status === 200) {
+			toast.success('Полетный лист успешно изменен')
+			push('/fly-lists')
+		}
+	}
 
 	const handleCategoryInputChange = (name: any, newValue: any) =>
 		setValue(name, newValue.value)
@@ -53,7 +65,7 @@ const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 	) : (
 		<div className={styles.flyList}>
 			<h1>Изменение полетного листа №{flyList!.id}</h1>
-			<form onSubmit={submit}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<label htmlFor="name">
 					Название
 					<Input
@@ -71,6 +83,7 @@ const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 					<Controller
 						control={control}
 						name="wallet"
+						defaultValue={flyList?.wallet.id.toString()}
 						render={({ field: { ref } }) => (
 							<Select
 								id="wallet"
@@ -99,6 +112,7 @@ const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 							required: true,
 						})}
 						required
+						defaultValue={flyList?.poolAddress}
 						placeholder="Введите пул"
 					/>
 				</label>
@@ -107,6 +121,7 @@ const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 					<Controller
 						control={control}
 						name="miner"
+						defaultValue={flyList?.miner.id.toString()}
 						render={({ field: { ref } }) => (
 							<Select
 								id="miner"

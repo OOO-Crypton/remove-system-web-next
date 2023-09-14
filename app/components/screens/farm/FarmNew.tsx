@@ -1,20 +1,27 @@
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 
-import { Button, LoaderSmall } from '@/components/ui'
+import { Button } from '@/components/ui'
+
+import { FarmsService } from '@/services/index'
 
 import styles from './FarmNew.module.scss'
 
-export type TypeCase = 'download' | 'add' | 'finally'
+export type TypeCase = 'download' | 'add'
 
 const FarmNewScreen: FC = () => {
 	const [type, setType] = useState<TypeCase>('download')
+	const [idNewFarm, setIdNewFarm] = useState<string>('')
 
 	useEffect(() => {
-		type === 'add' &&
-			setTimeout(() => {
-				setType('finally')
-			}, 10000)
+		if (type === 'add') {
+			const fetch = async () => {
+				const data = await FarmsService.add()
+				setIdNewFarm(data)
+			}
+
+			fetch()
+		}
 	}, [type])
 
 	const body = () => {
@@ -172,23 +179,11 @@ const FarmNewScreen: FC = () => {
 					<div className={styles.add}>
 						<p>
 							Новый ID фермы&nbsp;
-							<b style={{ color: 'var(--green)' }}>6F9619FF</b>
+							<b style={{ color: 'var(--green)' }}>{idNewFarm}</b>
 						</p>
 						<p>Введите полученный ID при настройке локальной системы</p>
-						<p>
-							Ожидание регистрации фермы{' '}
-							<span>
-								<LoaderSmall />
-							</span>
-						</p>
-					</div>
-				)
-			case 'finally':
-				return (
-					<div>
-						<p>Ферма успешно зарегестрирована</p>
 						<Button appearance="white" hover="green">
-							Перейти к ферме
+							Готово
 						</Button>
 					</div>
 				)

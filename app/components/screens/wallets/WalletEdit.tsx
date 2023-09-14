@@ -41,8 +41,6 @@ const WalletEditScreen: FC<{ id: string }> = ({ id }) => {
 	const onSubmit: SubmitHandler<IWalletForm> = async (value) => {
 		const status = await WalletsService.editById(wallet!.id, {
 			...value,
-			currency:
-				value.currency !== undefined ? value.currency : wallet!.currency.id,
 		})
 
 		if (status === 200) {
@@ -79,6 +77,7 @@ const WalletEditScreen: FC<{ id: string }> = ({ id }) => {
 							<Controller
 								control={control}
 								name="currency"
+								defaultValue={wallet?.id}
 								render={({ field: { ref } }) => (
 									<Select
 										id="currency"

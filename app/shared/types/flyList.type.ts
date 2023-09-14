@@ -7,7 +7,7 @@ export interface IFlyLists {
 	extendedConfig: string
 	miner: IMiner
 	wallet: IWallet
-	pool: IPool
+	poolAddress: string
 	user: IUser
 }
 
@@ -15,12 +15,6 @@ export interface IMiner {
 	id: number
 	name: string
 	minerInfo: string
-}
-
-export interface IPool {
-	id: number
-	name: string
-	poolAddresses: IPoolAddress[]
 }
 
 export interface IPoolAddress {
