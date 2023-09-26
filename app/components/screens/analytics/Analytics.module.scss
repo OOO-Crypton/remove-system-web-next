@@ -1,0 +1,33 @@
+.container {
+	@apply flex justify-between gap-4;
+
+	form {
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+
+		label {
+			color: var(--white);
+
+			input,
+			select {
+				width: 100%;
+				box-sizing: border-box;
+				margin-bottom: 0.5rem;
+			}
+		}
+
+		button {
+			width: min-content;
+			margin: 1rem auto 0 auto;
+		}
+	}
+
+	.chart {
+		width: 50%;
+	}
+
+	.loader {
+		@apply flex justify-center items-center w-2/4;
+	}
+}
