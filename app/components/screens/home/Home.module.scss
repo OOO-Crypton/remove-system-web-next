@@ -1,2 +1,120 @@
-.home {
+.container {
+	.head {
+		display: grid;
+		grid-template-columns: 40% 40%;
+		@apply grid items-center justify-evenly mb-40;
+
+		.info {
+			@apply flex flex-col;
+
+			> h1 {
+				@apply mb-6;
+			}
+
+			> button {
+				width: 300px;
+				margin: auto;
+			}
+		}
+
+		> img {
+			width: 300px;
+			margin: auto;
+		}
+	}
+
+	.info_os {
+		@apply flex w-3/4 m-auto mb-40;
+
+		> img {
+			width: 300px;
+			height: auto;
+		}
+
+		.text {
+			p {
+				@apply mb-10;
+			}
+		}
+	}
+
+	.sys {
+		@apply flex flex-col items-center mb-40;
+
+		.item {
+			@apply flex flex-col items-center mb-10;
+
+			> h1 {
+				@apply mb-3;
+			}
+		}
+
+		> button {
+			width: 300px;
+		}
+	}
+
+	.advantage {
+		@apply mb-40;
+
+		> h1 {
+			@apply text-center mb-10;
+		}
+
+		.container {
+			@apply flex flex-wrap gap-8 justify-center;
+
+			.item {
+				@apply rounded-xl flex flex-col items-center justify-center px-4 text-center;
+				background: var(--light-dark);
+				width: 300px;
+				height: 300px;
+
+				> svg {
+					@apply mb-4;
+				}
+			}
+		}
+	}
+
+	.chess {
+		@apply flex flex-col mb-40;
+
+		.item {
+			@apply flex items-center gap-10 m-10;
+
+			> img {
+				width: 45%;
+				height: auto;
+				max-height: 300px;
+			}
+
+			&:first-child {
+				> img {
+					width: 300px;
+					height: auto;
+				}
+			}
+
+			&:nth-child(even) {
+				@apply flex-row-reverse;
+			}
+		}
+	}
+
+	.equipment {
+		@apply mb-40;
+
+		> h1 {
+			@apply mb-10 text-center;
+		}
+
+		.item {
+			@apply flex flex-col items-center;
+
+			&:first-child {
+				@apply mb-10;
+			}
+		}
+	}
 }
