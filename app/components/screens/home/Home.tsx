@@ -10,7 +10,7 @@ import styles from './Home.module.scss'
 const HomeScreen: FC = () => {
 	const { push } = useRouter()
 	return (
-		<Meta title="Главаня" description="Главаня">
+		<Meta title="Главная" description="Главаня">
 			<div className={styles.container}>
 				<div className={styles.head}>
 					<div className={styles.info}>
@@ -23,10 +23,7 @@ const HomeScreen: FC = () => {
 							Зарегистрироваться
 						</Button>
 					</div>
-					<img
-						src="https://static.vecteezy.com/system/resources/previews/013/391/065/non_2x/bitcoin-3d-illustration-free-png.png"
-						alt=""
-					/>
+					<img src="img/png/home.png" alt="" />
 				</div>
 				<div className={styles.info_os}>
 					<img
@@ -88,7 +85,11 @@ const HomeScreen: FC = () => {
 						<p>Установите предпочтительный режим загрузки Legacy mode.</p>
 						<p>Отключите виртуализацию.</p>
 					</div>
-					<Button appearance="white" hover="green">
+					<Button
+						appearance="white"
+						hover="green"
+						onClick={() => push('/register')}
+					>
 						Зарегистрироваться
 					</Button>
 				</div>
