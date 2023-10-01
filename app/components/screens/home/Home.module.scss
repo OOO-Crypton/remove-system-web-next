@@ -21,6 +21,19 @@
 			width: 500px;
 			margin: auto;
 		}
+
+		@media (max-width: 950px) {
+			@apply flex flex-col-reverse;
+
+			h1 {
+				@apply text-center;
+			}
+
+			> img {
+				@apply mb-4;
+				width: 350px;
+			}
+		}
 	}
 
 	.info_os {
@@ -28,13 +41,21 @@
 
 		> img {
 			width: 300px;
-			height: auto;
+			height: 300px;
 		}
 
 		.text {
 			p {
 				@apply mb-10;
 			}
+		}
+
+		@media (max-width: 1100px) {
+			@apply w-full;
+		}
+
+		@media (max-width: 750px) {
+			@apply flex flex-col-reverse items-center;
 		}
 	}
 
@@ -157,6 +178,17 @@
 			&:first-child {
 				@apply mb-10;
 			}
+		}
+	}
+
+	@media (max-width: 750px) {
+		.head,
+		.info_os,
+		.sys,
+		.advantage,
+		.chess,
+		.equipment {
+			@apply mb-20;
 		}
 	}
 }

@@ -25,6 +25,7 @@ export const Header = (): JSX.Element => {
 					size={30}
 					className={styles.openbtn}
 					onClick={openNav}
+					fill="white"
 				/>
 				<div id="sidebar" className={styles.sidebarBlock}>
 					<MaterialIcon
