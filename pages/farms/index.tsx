@@ -1,4 +1,4 @@
-import FarmScreen from '@/components/screens/farm/Farm'
+import FarmScreen from '@/components/screens/farm/FarmScreen'
 
 import { NextPageAuth } from '@/shared/types/auth.types'
 

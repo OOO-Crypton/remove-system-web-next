@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 
@@ -23,13 +24,16 @@ const HomeScreen: FC = () => {
 							Зарегистрироваться
 						</Button>
 					</div>
-					<img src="img/png/home.png" alt="" />
+					<Image
+						src="/img/png/home.png"
+						alt=""
+						width={300}
+						height={300}
+						priority={true}
+					/>
 				</div>
 				<div className={styles.info_os}>
-					<img
-						src="https://www.freepnglogos.com/uploads/linux-png/file-icons-flat-linux-svg-wikimedia-commons-6.png"
-						alt=""
-					/>
+					<Image width={300} height={200} src="/img/png/linux.png" alt="" />
 					<div className={styles.text}>
 						<p>
 							<b>CryptonOS</b> — это специализированная система под Linux для
@@ -145,7 +149,12 @@ const HomeScreen: FC = () => {
 				</div>
 				<div className={styles.chess}>
 					<div className={styles.item}>
-						<img src="img/png/application.png" alt="" />
+						<Image
+							src="/img/png/application.png"
+							alt=""
+							width={300}
+							height={260}
+						/>
 						<div className={styles.text}>
 							<SubHeading title="Контроль и управление с телефона" />
 							<p>
@@ -162,14 +171,46 @@ const HomeScreen: FC = () => {
 					<div className={styles.item}>
 						<div className={styles.img}>
 							<div>
-								<img src="img/png/ethereum.png" alt="" />
-								<img src="img/png/bitcoin-gold.png/" alt="" />
-								<img src="img/png/monero.png" style={{ height: 90 }} alt="" />
+								<Image
+									src="/img/png/ethereum.png"
+									alt=""
+									width={62}
+									height={100}
+								/>
+								<Image
+									src="/img/png/bitcoin-gold.png"
+									alt=""
+									width={100}
+									height={100}
+								/>
+								<Image
+									width={100}
+									height={100}
+									src="/img/png/monero.png"
+									style={{ height: 90 }}
+									alt=""
+								/>
 							</div>
 							<div>
-								<img src="img/svg/2miners_w.svg" alt="" />
-								<img src="img/png/f2pool.png" style={{ height: 80 }} alt="" />
-								<img src="img/png/sigmapool.png" alt="" />
+								<Image
+									src="/img/svg/2miners_w.svg"
+									alt=""
+									width={100}
+									height={100}
+								/>
+								<Image
+									width={80}
+									height={80}
+									src="/img/png/f2pool.png"
+									style={{ height: 80 }}
+									alt=""
+								/>
+								<Image
+									src="/img/png/sigmapool.png"
+									alt=""
+									width={100}
+									height={100}
+								/>
 							</div>
 						</div>
 						<div className={styles.text}>
@@ -182,7 +223,12 @@ const HomeScreen: FC = () => {
 						</div>
 					</div>
 					<div className={styles.item}>
-						<img src="img/png/settings.png" alt="" />
+						<Image
+							src="/img/png/settings.png"
+							alt=""
+							width={300}
+							height={200}
+						/>
 						<div className={styles.text}>
 							<SubHeading title="Тонкая настройка и мониторинг" />
 							<p>
@@ -193,7 +239,7 @@ const HomeScreen: FC = () => {
 						</div>
 					</div>
 					<div className={styles.item}>
-						<img src="img/png/graf.png" alt="" />
+						<Image src="/img/png/graf.png" alt="" width={300} height={200} />
 						<div className={styles.text}>
 							<SubHeading title="Наблюдать за работой майнера" />
 							<p>

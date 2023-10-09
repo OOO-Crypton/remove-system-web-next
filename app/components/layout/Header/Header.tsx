@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { MaterialIcon } from '@/components/ui'
 
@@ -8,6 +9,7 @@ import styles from './Header.module.scss'
 
 export const Header = (): JSX.Element => {
 	const { token } = useAuth()
+	const { push } = useRouter()
 
 	function openNav() {
 		document.getElementById('sidebar')!.style.width = '100%'
@@ -33,7 +35,7 @@ export const Header = (): JSX.Element => {
 						className={styles.closeBtn}
 						onClick={closeSidebar}
 					/>
-					<Link href="/" className={styles.logo}>
+					<Link href="/" className={styles.logo} onClick={closeSidebar}>
 						<picture id="logo">
 							<source srcSet="/img/webp/logo.webp" type="image/webp" />
 							<img src="/img/png/logo.png" alt="err" height="50" width="150" />
@@ -43,31 +45,52 @@ export const Header = (): JSX.Element => {
 						{token ? (
 							<ul className={styles.topmenu}>
 								<li>
-									<Link href="/">Главная</Link>
+									<Link href="/" onClick={closeSidebar}>
+										Главная
+									</Link>
 								</li>
 								<li>
-									<Link href="/fly-lists">Полетные листы</Link>
+									<Link href="/fly-lists" onClick={closeSidebar}>
+										Полетные листы
+									</Link>
 								</li>
 								<li>
-									<Link href="/farms">Фермы</Link>
+									<Link href="/farms" onClick={closeSidebar}>
+										Фермы
+									</Link>
 								</li>
 								<li>
-									<Link href="/wallets">Кошельки</Link>
+									<Link href="/wallets" onClick={closeSidebar}>
+										Кошельки
+									</Link>
 								</li>
 								<li>
-									<Link href="/my-account">Личный кабинет</Link>
+									<Link href="/analytics" onClick={closeSidebar}>
+										Аналитика
+									</Link>
+								</li>
+								<li>
+									<Link href="/my-account" onClick={closeSidebar}>
+										Личный кабинет
+									</Link>
 								</li>
 							</ul>
 						) : (
 							<ul className={styles.topmenu}>
 								<li>
-									<Link href="/">Главная</Link>
+									<Link href="/" onClick={closeSidebar}>
+										Главная
+									</Link>
 								</li>
 								<li>
-									<Link href="/auth">Авторизация</Link>
+									<Link href="/auth" onClick={closeSidebar}>
+										Авторизация
+									</Link>
 								</li>
 								<li>
-									<Link href="/register">Регистрация</Link>
+									<Link href="/register" onClick={closeSidebar}>
+										Регистрация
+									</Link>
 								</li>
 							</ul>
 						)}
@@ -94,6 +117,9 @@ export const Header = (): JSX.Element => {
 								</li>
 								<li>
 									<Link href="/wallets">Кошельки</Link>
+								</li>
+								<li>
+									<Link href="/analytics">Аналитика</Link>
 								</li>
 								<li>
 									<Link href="/my-account">Личный кабинет</Link>

@@ -13,6 +13,7 @@ export const reg = createAsyncThunk<IAuthResponse, IRegister>(
 		try {
 			const response = await AuthService.register(body)
 			toast.success('Completed successfully')
+			window.location.href = 'my-account'
 			return response.data
 		} catch (error: any) {
 			switch (error.response.data) {

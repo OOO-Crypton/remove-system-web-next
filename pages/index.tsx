@@ -10,12 +10,10 @@ export const getStaticProps: GetStaticProps = async () => {
 	try {
 		return {
 			props: {},
-			revalidate: 10,
 		}
 	} catch (e) {
 		return {
 			notFound: true,
-			revalidate: 60,
 		}
 	}
 }
