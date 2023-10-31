@@ -9,6 +9,7 @@ import Layout from '@/components/layout/Layout'
 import { TypeComponentAuthFields } from '@/shared/types/auth.types'
 
 import AuthProvider from './AuthProvider/AuthProvider'
+import { FarmsWrapper } from './FarmsProvider/FarmProvider'
 import HeadProvider from './HeadProvider/HeadProvider'
 
 const queryClient = new QueryClient({
@@ -31,7 +32,9 @@ const MainProvider: FC<TypeComponentAuthFields> = ({ children, Component }) => {
 						autoClose={3000}
 					/>
 					<AuthProvider Component={Component}>
-						<Layout>{children}</Layout>
+						<FarmsWrapper>
+							<Layout>{children}</Layout>
+						</FarmsWrapper>
 					</AuthProvider>
 				</QueryClientProvider>
 			</Provider>

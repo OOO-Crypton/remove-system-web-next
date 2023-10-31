@@ -88,7 +88,7 @@
 
 .modal {
 	@apply p-3 border rounded-xl;
-	width: 300px;
+	width: 350px;
 	min-height: 250px;
 	height: auto;
 	background-color: var(--light-dark);
@@ -106,8 +106,8 @@
 	}
 
 	.main {
-		@apply flex flex-col justify-between;
-		height: calc(250px - 60px - 0.75rem);
+		@apply flex flex-col justify-between py-4;
+		min-height: calc(250px - 60px - 0.75rem);
 
 		> label {
 			@apply my-4;

@@ -26,9 +26,9 @@ const FlyListScreen: FC = () => {
 	const [flyList, setFlyList] = useState<IFlyLists[]>([])
 	const [isLoad, setIsLoad] = useState<boolean>(true)
 	const [modalIsOpen, setIsOpen] = useState<boolean>(false)
-	const [modalFlyId, setModalFlyId] = useState<string>('')
+	const [modalFlyId, setModalFlyId] = useState<number>(0)
 
-	function openModal(id: string) {
+	function openModal(id: number) {
 		setModalFlyId(id)
 		setIsOpen(true)
 	}
@@ -42,6 +42,8 @@ const FlyListScreen: FC = () => {
 	useEffect(() => {
 		const getData = async () => {
 			const flyList = await FlightSheetsService.getAll()
+
+			console.log(flyList)
 
 			setFlyList(flyList)
 			setIsLoad(false)
@@ -83,7 +85,7 @@ const FlyListScreen: FC = () => {
 											<MaterialIcon
 												name="MdRocketLaunch"
 												size={35}
-												onClick={() => openModal(item.id.toString())}
+												onClick={() => openModal(item.id)}
 											/>
 											<MaterialIcon
 												name="MdEditSquare"

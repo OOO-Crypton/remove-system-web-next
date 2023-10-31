@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui'
@@ -10,6 +11,7 @@ import styles from './FarmNew.module.scss'
 export type TypeCase = 'download' | 'add'
 
 const FarmNewScreen: FC = () => {
+	const { push } = useRouter()
 	const [type, setType] = useState<TypeCase>('download')
 	const [idNewFarm, setIdNewFarm] = useState<string>('')
 
@@ -182,7 +184,12 @@ const FarmNewScreen: FC = () => {
 							<b style={{ color: 'var(--green)' }}>{idNewFarm}</b>
 						</p>
 						<p>Введите полученный ID при настройке локальной системы</p>
-						<Button appearance="white" hover="green">
+						<Button
+							appearance="white"
+							hover="green"
+							onClick={() => push('/farms')}
+							style={{ marginTop: 10 }}
+						>
 							Готово
 						</Button>
 					</div>

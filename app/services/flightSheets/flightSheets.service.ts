@@ -9,10 +9,10 @@ export const FlightSheetsService = {
 		const formData = new FormData()
 
 		formData.append('Name', body.name)
-		formData.append('ExtendedConfig', body.extendedConfig)
+		formData.append('ExtendedConfig', '')
 		formData.append('MinerId', body.miner)
 		formData.append('WalletId', body.wallet)
-		formData.append('PoolId', body.pool)
+		formData.append('PoolAddress', body.pool)
 
 		return await axiosPrivate.post(getFlightSheetsUrl('add'), formData)
 	},

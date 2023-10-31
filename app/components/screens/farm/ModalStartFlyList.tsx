@@ -5,47 +5,42 @@ import { toast } from 'react-toastify'
 import { Button, MaterialIcon, SubHeading } from '@/components/ui'
 
 import { IFarm } from '@/shared/types/farm.types'
+import { IFlyLists } from '@/shared/types/flyList.type'
 
-import { FarmsService } from '@/services/index'
+import { FarmsService, FlightSheetsService } from '@/services/index'
 
 import { SelectMyStylesMinList } from '@/configs/stylesSelect.config'
 
-import styles from './FlyLists.module.scss'
+import styles from './../fly-lists/FlyLists.module.scss'
 
-const ModalStartFlyList: FC<{ flyId: number; close: () => void }> = ({
-	flyId,
+const ModalStartFlyList: FC<{ farmId: number; close: () => void }> = ({
+	farmId,
 	close,
 }) => {
-	const [miner, setMiner] = useState<IFarm[]>()
-	const [farm, setFarm] = useState<number>(0)
+	const [flyList, setFlyList] = useState<IFlyLists[]>()
+	const [flyId, setFlyId] = useState<number>(0)
 
 	useEffect(() => {
 		const getData = async () => {
-			const farms = await FarmsService.all()
-			setMiner(farms)
+			const farms = await FlightSheetsService.getAll()
+			setFlyList(farms)
 		}
 
 		getData()
 	}, [])
 
 	const start = () => {
-		try {
-			return async () => {
-				const status = await FarmsService.startFliList(farm, flyId)
-				if (status === 200) {
-					toast.success('Полетный лист успешно запущен')
-					close()
-				}
+		return async () => {
+			const status = await FarmsService.startFliList(farmId, flyId)
+			if (status === 200) {
+				toast.success('Полетный лист успешно запущен')
+				close()
 			}
-		} catch (error) {
-			console.log(error)
 		}
 	}
 
 	const handleChange = (option: any) => {
-		console.log(option, 'farm')
-
-		setFarm(option.value)
+		setFlyId(option.value)
 	}
 
 	return (
@@ -55,17 +50,17 @@ const ModalStartFlyList: FC<{ flyId: number; close: () => void }> = ({
 				<MaterialIcon name="MdClose" size={20} onClick={() => close()} />
 			</div>
 			<div className={styles.main}>
-				<label htmlFor="mainer">
-					Ферма
+				<label htmlFor="flyList">
+					Полетный лист
 					<Select
-						id="mainer"
+						id="flyList"
 						onChange={(option) => handleChange(option)}
-						options={miner?.map((item) => ({
+						options={flyList?.map((item) => ({
 							value: item.id,
-							label: item.id,
+							label: item.name,
 						}))}
 						styles={SelectMyStylesMinList}
-						placeholder="Выберите ферму"
+						placeholder="Выберите полетный лист"
 						required
 					/>
 				</label>

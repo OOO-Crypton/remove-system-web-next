@@ -1,92 +1,231 @@
 import { nanoid } from '@reduxjs/toolkit'
 import Image from 'next/image'
-import { FC } from 'react'
+import { useRouter } from 'next/router'
+import { FC, useEffect, useState } from 'react'
+import Modal from 'react-modal'
 
-import { Button } from '@/components/ui'
+import { Button, Heading, SubHeading } from '@/components/ui'
 
-import { IFarm } from '@/shared/types/farm.types'
+import { useAuth } from '@/hooks/useAuth'
+
+import { IFarm, IFarmMonit } from '@/shared/types/farm.types'
+
+import { FarmsService } from '@/services/index'
+
+import { modalStyle } from '@/configs/style-modal'
 
 import styles from './FarmId.module.scss'
-import { HomeData } from './data'
+import ModalStartFlyList from './ModalStartFlyList'
+import SettingVideoCard from './SettingVideoCard'
 
 const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
-	const farm: IFarm = HomeData.filter((item) => item.id === id)[0]
+	const { push } = useRouter()
+	const [farm, setFarm] = useState<IFarmMonit>()
+	const [modalIsOpen, setIsOpen] = useState<boolean>(false)
+	const [farmInfo, setFarmInfo] = useState<IFarm>()
+	const [modalFlyId, setModalFlyId] = useState<number>(0)
+	const [modalType, setModalType] = useState<string>('')
+
+	function openModal(id: number, type: string) {
+		if (type === 'start') {
+			setModalFlyId(id)
+			setIsOpen(true)
+			setModalType('start')
+		}
+		if (type === 'setting') {
+			setIsOpen(true)
+			setModalType('setting')
+		}
+	}
+
+	function closeModal() {
+		setIsOpen(false)
+	}
+
+	const { token } = useAuth()
+
+	useEffect(() => {
+		const socket = new WebSocket(
+			`ws://192.168.0.133/api/farms/stats?token=${token}`
+		)
+		socket.onmessage = (msg: any) => {
+			if (msg.data === 'no farms') {
+				setFarm(undefined)
+			} else {
+				setFarm(
+					JSON.parse(msg.data).find(
+						(item: IFarmMonit) => item.Farm === Number(id)
+					)
+				)
+			}
+		}
+
+		const fetch = async () => {
+			const farmInfo = await FarmsService.getById(id)
+
+			setFarmInfo(farmInfo)
+		}
+		fetch()
+
+		return () => {
+			if (socket?.readyState !== 3) socket.close()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<div className={styles.mainWrapper}>
-			<h1>Ферма {farm.id}</h1>
-			<div className={styles.infoWrapper}>
-				<div className={styles.farmSysInfo}>
-					<h2>Информация о системе</h2>
-					<div className={styles.sysInfoDesc}>
-						<p>
-							Материнская плата: <span>{farm.systemInfo}</span>
-						</p>
-						<p>
-							CPU: <span>{farm.systemInfo}</span>
-						</p>
-						<p>
-							Версия ОС: <span>{farm.systemInfo}</span>
-						</p>
-						<p>
-							IP-адрес: <span>{farm.systemInfo}</span>
-						</p>
+			<>
+				<Heading title={`Ферма №${id}`} />
+				<div className={styles.infoWrapper}>
+					<div className={styles.farmSysInfo}>
+						<SubHeading title="Информация о системе" />
+						<div className={styles.sysInfoDesc}>
+							<p>
+								Материнская плата:{' '}
+								<span>
+									{farmInfo?.systemInfo
+										? `${farmInfo?.systemInfo?.motherboard}`
+										: '-'}
+								</span>
+							</p>
+							<p>
+								CPU:{' '}
+								<span>
+									{farmInfo?.systemInfo
+										? farmInfo?.systemInfo?.cpu
+												.split('model:')[1]
+												.split('bits:')[0]
+										: '-'}
+								</span>
+							</p>
+							<p>
+								Версия ОС:{' '}
+								<span>
+									{farmInfo?.systemInfo?.osVersion
+										? farmInfo?.systemInfo?.osVersion
+										: '-'}
+								</span>
+							</p>
+							<p>
+								IP-адрес:{' '}
+								<span>
+									{farmInfo?.localSystemAddress
+										? farmInfo?.localSystemAddress
+										: '-'}
+								</span>
+							</p>
+							<p>
+								Полетный лист:{' '}
+								<span>
+									{farmInfo?.activeFlightSheet
+										? farmInfo?.activeFlightSheet.name
+										: '-'}
+								</span>
+							</p>
+						</div>
 					</div>
+					{farm ? (
+						<div className={styles.btnsReboot}>
+							{farm?.ActiveFlightSheetId === 0 ? (
+								<Button
+									appearance="white"
+									hover="green"
+									style={{ width: 200 }}
+									onClick={() => openModal(farm?.Farm, 'start')}
+								>
+									Установить активный полетный лист
+								</Button>
+							) : null}
+							<Button
+								appearance="white"
+								hover="green"
+								onClick={() => FarmsService.restartFarm(id)}
+							>
+								Перезагрузить
+							</Button>
+							{farm?.Stat ? (
+								<Button
+									appearance="white"
+									hover="red"
+									onClick={() => FarmsService.stopFarm(id)}
+								>
+									Остановить
+								</Button>
+							) : (
+								<Button
+									appearance="white"
+									hover="green"
+									onClick={() => FarmsService.startFarm(id)}
+								>
+									Запустить
+								</Button>
+							)}
+							<Button
+								appearance="white"
+								hover="red"
+								onClick={() => {
+									FarmsService.deleteFarm(id)
+									push('/farms')
+								}}
+							>
+								Удалить ферму
+							</Button>
+						</div>
+					) : null}
 				</div>
-				<div className={styles.btnsReboot}>
-					<Button appearance="white" hover="green">
-						Перезагрузить
-					</Button>
-					<Button appearance="white" hover="green">
-						Перезапустить майнер
-					</Button>
-					<Button appearance="white" hover="red">
-						Выключить
-					</Button>
-				</div>
-			</div>
-			<div className={styles.gpuTableWrapper}>
-				{/* <table className={styles.gpuTable}>
-					<thead>
-						<tr>
-							<th></th>
-							<th>Хэшрейт</th>
-							<th>Температура</th>
-							<th>Потребление</th>
-							<th>Кулер</th>
-							<th>Ядро</th>
-							<th>Память</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{farm.gpus.map((item, idx) => (
-							<tr key={nanoid()}>
-								<td>
-									<h4>GPU {item.id}</h4>
-									<p>{item.name}</p>
-								</td>
-								<td>{item.hashrate} Mh/s</td>
-								<td>{item.temperature} C</td>
-								<td>{item.powerConsumption} W</td>
-								<td>{item.fanSpeed} %</td>
-								<td>{item.core}</td>
-								<td>{item.memory}</td>
-								<td>
-									<Image
-										src="/img/svg/gear-white.svg"
-										alt="gear icon"
-										width={35}
-										height={35}
-										draggable={false}
-										unoptimized={true}
-									/>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table> */}
-			</div>
+				{farm?.Stat ? (
+					<div className={styles.gpuTableWrapper}>
+						<table className={styles.gpuTable}>
+							<thead style={{ position: 'relative', zIndex: 0 }}>
+								<tr>
+									<th>Название</th>
+									<th>Хэшрейт</th>
+									<th>Температура</th>
+									<th>Потребление</th>
+									<th>Кулер</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{farm?.Stat?.map((item, idx) => (
+									<tr key={nanoid()}>
+										<td>
+											<p>{item.FullName.split(',')[0]}</p>
+										</td>
+										<td>{item.MonitoringView.CurrentHashrate} Mh/s</td>
+										<td>{item.MonitoringView.GPUTemperature} C</td>
+										<td>{item.MonitoringView.EnergyConsumption} W</td>
+										<td>{item.MonitoringView.FanRPM} %</td>
+										<td>
+											<Image
+												src="/img/svg/gear-white.svg"
+												alt="gear icon"
+												width={35}
+												height={35}
+												draggable={false}
+												unoptimized={true}
+												onClick={() => openModal(farm?.Farm, 'setting')}
+											/>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				) : null}
+			</>
+			<Modal
+				isOpen={modalIsOpen}
+				onRequestClose={closeModal}
+				ariaHideApp={false}
+				style={modalStyle}
+			>
+				{modalType === 'start' ?? (
+					<ModalStartFlyList farmId={modalFlyId} close={closeModal} />
+				)}
+				{modalType === 'setting' ?? <SettingVideoCard close={closeModal} />}
+			</Modal>
 		</div>
 	)
 }

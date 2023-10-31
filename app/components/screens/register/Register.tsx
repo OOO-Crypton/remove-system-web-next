@@ -25,7 +25,7 @@ const RegisterScreen: FC = () => {
 
 	const { reg } = useActions()
 
-	const onSubmit: SubmitHandler<IRegister> = (data) => {
+	const onSubmit: SubmitHandler<IRegister> = async (data) => {
 		reg(data)
 	}
 

@@ -28,7 +28,7 @@ const AuthScreen: FC = () => {
 
 	const { login } = useActions()
 
-	const onSubmit: SubmitHandler<ILogin> = (data) => {
+	const onSubmit: SubmitHandler<ILogin> = async (data) => {
 		login(data)
 	}
 
