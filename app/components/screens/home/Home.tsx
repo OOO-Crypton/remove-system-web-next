@@ -252,6 +252,13 @@ const HomeScreen: FC = () => {
 				</div>
 				<div className={styles.equipment}>
 					<Heading title="Список поддерживаемого оборудования:" />
+					<Button
+						appearance="white"
+						hover="green"
+						onClick={() => push('/razgon')}
+					>
+						Как правильно разогнать
+					</Button>
 					<div className={styles.item}>
 						<SubHeading title="Nvidia:" style={{ color: 'green' }} />
 						<p>

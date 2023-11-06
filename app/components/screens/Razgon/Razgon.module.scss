@@ -1,0 +1,15 @@
+.container {
+	width: 75%;
+	margin: auto;
+
+	p {
+		@apply py-3;
+	}
+
+	ol {
+		list-style: auto;
+		color: var(--white);
+		font-size: 18px;
+		padding-left: 40px;
+	}
+}

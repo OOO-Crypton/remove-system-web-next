@@ -162,7 +162,11 @@
 	}
 
 	.equipment {
-		@apply mb-40;
+		@apply mb-40 flex flex-col items-center;
+
+		button {
+			@apply mb-4;
+		}
 
 		> h1 {
 			@apply mb-10 text-center;
