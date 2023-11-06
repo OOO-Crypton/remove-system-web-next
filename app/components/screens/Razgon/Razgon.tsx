@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { FC } from 'react'
 
 import { Heading } from '@/components/ui'
@@ -76,13 +77,17 @@ const Razgon: FC = () => {
 				частота памяти, лимит мощности и ожидаемый хешрейт. Для начала приводим
 				данные для видеокарт Nvidia.
 			</p>
-			<img
+			<Image
+				width="890"
+				height="1500"
 				src="/img/png/nvidia.png"
 				alt=""
 				style={{ display: 'block', margin: 'auto', borderRadius: 15 }}
 			/>
 			<p>И данные по AMD.</p>
-			<img
+			<Image
+				width="890"
+				height="1500"
 				src="/img/png/amd.png"
 				alt=""
 				style={{ display: 'block', margin: 'auto', borderRadius: 15 }}
