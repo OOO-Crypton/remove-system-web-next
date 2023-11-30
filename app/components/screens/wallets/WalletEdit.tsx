@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
 
-import { Button, Input, Loader } from '@/components/ui'
+import { Button, Input, Loader, SubHeading } from '@/components/ui'
 
 import { ICurrency, IWallet, IWalletForm } from '@/shared/types/wallet.type'
 
@@ -58,7 +58,7 @@ const WalletEditScreen: FC<{ id: string }> = ({ id }) => {
 				<Loader />
 			) : (
 				<>
-					<h1>Редактирование кошелка №{wallet?.id}</h1>
+					<SubHeading title={`Редактирование кошелка №${wallet?.id}`} />
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<label htmlFor="name">
 							Название
@@ -100,7 +100,7 @@ const WalletEditScreen: FC<{ id: string }> = ({ id }) => {
 							/>
 						</label>
 						<label htmlFor="address">
-							Название
+							Адрес кошелька
 							<Input
 								type="text"
 								{...register('address', {
@@ -108,7 +108,7 @@ const WalletEditScreen: FC<{ id: string }> = ({ id }) => {
 								})}
 								required
 								defaultValue={wallet?.address}
-								placeholder="Введите назавние"
+								placeholder="Введите адрес кошелька"
 							/>
 						</label>
 						<Button appearance="white" hover="green">

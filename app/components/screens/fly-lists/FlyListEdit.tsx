@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
 
-import { Button, Input, Loader } from '@/components/ui'
+import { Button, Input, Loader, SubHeading } from '@/components/ui'
 
 import { IFlyLists, IFlyListsForm, IMiner } from '@/shared/types/flyList.type'
 import { IWallet } from '@/shared/types/wallet.type'
@@ -64,7 +64,7 @@ const FlyListEditScreen: FC<{ id: string }> = ({ id }) => {
 		<Loader />
 	) : (
 		<div className={styles.flyList}>
-			<h1>Изменение полетного листа №{flyList!.id}</h1>
+			<SubHeading title={`Изменение полетного листа №${flyList!.id}`} />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<label htmlFor="name">
 					Название

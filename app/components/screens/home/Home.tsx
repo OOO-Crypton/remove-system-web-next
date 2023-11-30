@@ -257,7 +257,14 @@ const HomeScreen: FC = () => {
 						hover="green"
 						onClick={() => push('/razgon')}
 					>
-						Как правильно разогнать
+						Рекомендации по разгону
+					</Button>
+					<Button
+						appearance="white"
+						hover="green"
+						onClick={() => push('/recommendations-razgon')}
+					>
+						Альтернативное использование выделяемой тепловой энергии
 					</Button>
 					<div className={styles.item}>
 						<SubHeading title="Nvidia:" style={{ color: 'green' }} />

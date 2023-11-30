@@ -37,7 +37,7 @@ export interface IFarm {
 	localSystemID: string
 	containerGUID: string
 	user: IUser
-	activeFlightSheet: any
+	activeFlightSheet: ActiveFlightSheet
 }
 
 export interface SystemInfo {

@@ -1,9 +1,10 @@
+import cn from 'clsx'
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { Button, Field, Input, MaterialIcon, SubHeading } from '@/components/ui'
+import { Button, Field, MaterialIcon, SubHeading } from '@/components/ui'
 
-import styles from './../fly-lists/FlyLists.module.scss'
+import styles from './Modal.module.scss'
 
 interface ISettingVideoCard {
 	core: number
@@ -12,7 +13,10 @@ interface ISettingVideoCard {
 	consumption: number
 }
 
-const SettingVideoCard: FC<{ close: () => void }> = ({ close }) => {
+export const SettingVideoCard: FC<{ number: number; close: () => void }> = ({
+	number,
+	close,
+}) => {
 	const {
 		register,
 		handleSubmit,
@@ -28,10 +32,13 @@ const SettingVideoCard: FC<{ close: () => void }> = ({ close }) => {
 	return (
 		<div className={styles.modal}>
 			<div className={styles.header}>
-				<SubHeading title="Настройки видеокарты №1" />
+				<SubHeading title={`Настройки видеокарты №${number + 1}`} />
 				<MaterialIcon name="MdClose" size={20} onClick={() => close()} />
 			</div>
-			<form onSubmit={handleSubmit(onSubmit)} className={styles.main}>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className={cn(styles.main, 'flex-col')}
+			>
 				<Field
 					{...register('core', {
 						required: 'Частота ядра обязательная!',
@@ -84,5 +91,3 @@ const SettingVideoCard: FC<{ close: () => void }> = ({ close }) => {
 		</div>
 	)
 }
-
-export default SettingVideoCard

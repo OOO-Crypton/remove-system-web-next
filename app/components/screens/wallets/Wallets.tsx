@@ -4,7 +4,13 @@ import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
 
-import { Button, Loader, MaterialIcon, SubHeading } from '@/components/ui'
+import {
+	Button,
+	Heading,
+	Loader,
+	MaterialIcon,
+	SubHeading,
+} from '@/components/ui'
 
 import { IWallet } from '@/shared/types/wallet.type'
 
@@ -47,7 +53,7 @@ const WalletsScreen: FC = () => {
 				<Loader />
 			) : (
 				<>
-					<h1>Мои кошельки</h1>
+					<Heading title="Мои кошельки" />
 					<div className={styles.items}>
 						{wallets?.length > 0 ? (
 							wallets?.map((wallet) => (

@@ -1,0 +1,27 @@
+.modal {
+	@apply p-3 border rounded-xl;
+	width: 350px;
+	// min-height: 250px;
+	height: auto;
+	background-color: var(--light-dark);
+
+	.header {
+		@apply flex justify-between;
+
+		> h2 {
+			@apply m-auto;
+		}
+
+		> svg {
+			@apply cursor-pointer fill-white;
+		}
+	}
+
+	.main {
+		@apply flex py-3;
+
+		&.choice {
+			@apply flex-col gap-2;
+		}
+	}
+}

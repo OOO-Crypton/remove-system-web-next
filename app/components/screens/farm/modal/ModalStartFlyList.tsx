@@ -4,16 +4,15 @@ import { toast } from 'react-toastify'
 
 import { Button, MaterialIcon, SubHeading } from '@/components/ui'
 
-import { IFarm } from '@/shared/types/farm.types'
 import { IFlyLists } from '@/shared/types/flyList.type'
 
 import { FarmsService, FlightSheetsService } from '@/services/index'
 
 import { SelectMyStylesMinList } from '@/configs/stylesSelect.config'
 
-import styles from './../fly-lists/FlyLists.module.scss'
+import styles from './Modal.module.scss'
 
-const ModalStartFlyList: FC<{ farmId: number; close: () => void }> = ({
+export const ModalStartFlyList: FC<{ farmId: number; close: () => void }> = ({
 	farmId,
 	close,
 }) => {
@@ -71,5 +70,3 @@ const ModalStartFlyList: FC<{ farmId: number; close: () => void }> = ({
 		</div>
 	)
 }
-
-export default ModalStartFlyList

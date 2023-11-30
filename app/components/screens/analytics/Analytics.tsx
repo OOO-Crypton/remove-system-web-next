@@ -80,7 +80,7 @@ const AnalyticsScreen: FC = () => {
 					/>
 				</label>
 				<label htmlFor="currenciesId">
-					Кошелек
+					Монета
 					<Controller
 						control={control}
 						name="currenciesId"

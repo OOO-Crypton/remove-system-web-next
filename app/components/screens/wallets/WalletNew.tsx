@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
 
-import { Button, Input } from '@/components/ui'
+import { Button, Input, SubHeading } from '@/components/ui'
 
 import { ICurrency, IWalletForm } from '@/shared/types/wallet.type'
 
@@ -51,7 +51,7 @@ const WalletNewScreen: FC = () => {
 
 	return (
 		<div className={styles.editWallet}>
-			<h1>Создание нового кошелька</h1>
+			<SubHeading title="Создание нового кошелька" />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<label htmlFor="Name">
 					Название

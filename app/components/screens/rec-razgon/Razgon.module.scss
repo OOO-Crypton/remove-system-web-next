@@ -1,0 +1,14 @@
+.container {
+	@apply w-3/4 m-auto text-white;
+
+	p {
+		@apply py-3;
+	}
+
+	ol {
+		list-style: auto;
+		color: var(--white);
+		font-size: 18px;
+		padding-left: 40px;
+	}
+}

@@ -15,27 +15,38 @@ import { FarmsService } from '@/services/index'
 import { modalStyle } from '@/configs/style-modal'
 
 import styles from './FarmId.module.scss'
-import ModalStartFlyList from './ModalStartFlyList'
-import SettingVideoCard from './SettingVideoCard'
+import {
+	ChoiceSettingVideoCard,
+	ModalStartFlyList,
+	SettingAutoVideoCard,
+	SettingVideoCard,
+} from './modal'
+
+export type ModalType = 'start' | 'choice' | 'auto' | 'setting'
 
 const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 	const { push } = useRouter()
 	const [farm, setFarm] = useState<IFarmMonit>()
 	const [modalIsOpen, setIsOpen] = useState<boolean>(false)
 	const [farmInfo, setFarmInfo] = useState<IFarm>()
-	const [modalFlyId, setModalFlyId] = useState<number>(0)
-	const [modalType, setModalType] = useState<string>('')
+	const [farmProp, setFarmProp] = useState<IFarmMonit>()
+	const [modalType, setModalType] = useState<ModalType>()
+	const [currentVideo, setCurrentVideo] = useState<number>(0)
 
-	function openModal(id: number, type: string) {
-		if (type === 'start') {
-			setModalFlyId(id)
-			setIsOpen(true)
-			setModalType('start')
+	function openModal(
+		type: ModalType,
+		{
+			farm,
+			video,
+		}: {
+			farm?: IFarmMonit
+			video?: number
 		}
-		if (type === 'setting') {
-			setIsOpen(true)
-			setModalType('setting')
-		}
+	) {
+		setModalType(type)
+		farm && setFarmProp(farm)
+		video && setCurrentVideo(video)
+		setIsOpen(true)
 	}
 
 	function closeModal() {
@@ -73,6 +84,38 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	const Component = () => {
+		switch (modalType) {
+			case 'start':
+				return (
+					<ModalStartFlyList
+						farmId={farmProp?.Farm ? farmProp?.Farm : 0}
+						close={closeModal}
+					/>
+				)
+			case 'choice':
+				return (
+					<ChoiceSettingVideoCard
+						number={currentVideo}
+						open={openModal}
+						close={closeModal}
+					/>
+				)
+			case 'setting':
+				return <SettingVideoCard number={currentVideo} close={closeModal} />
+			case 'auto':
+				return (
+					<SettingAutoVideoCard
+						number={currentVideo}
+						auto={false}
+						close={closeModal}
+					/>
+				)
+			default:
+				return <></>
+		}
+	}
+
 	return (
 		<div className={styles.mainWrapper}>
 			<>
@@ -92,11 +135,7 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 							<p>
 								CPU:{' '}
 								<span>
-									{farmInfo?.systemInfo
-										? farmInfo?.systemInfo?.cpu
-												.split('model:')[1]
-												.split('bits:')[0]
-										: '-'}
+									{farmInfo?.systemInfo ? farmInfo?.systemInfo?.cpu : '-'}
 								</span>
 							</p>
 							<p>
@@ -132,7 +171,11 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 									appearance="white"
 									hover="green"
 									style={{ width: 200 }}
-									onClick={() => openModal(farm?.Farm, 'start')}
+									onClick={() =>
+										openModal('start', {
+											farm: farm,
+										})
+									}
 								>
 									Установить активный полетный лист
 								</Button>
@@ -205,7 +248,11 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 												height={35}
 												draggable={false}
 												unoptimized={true}
-												onClick={() => openModal(farm?.Farm, 'setting')}
+												onClick={() =>
+													openModal('choice', {
+														video: idx,
+													})
+												}
 											/>
 										</td>
 									</tr>
@@ -221,10 +268,7 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 				ariaHideApp={false}
 				style={modalStyle}
 			>
-				{modalType === 'start' ?? (
-					<ModalStartFlyList farmId={modalFlyId} close={closeModal} />
-				)}
-				{modalType === 'setting' ?? <SettingVideoCard close={closeModal} />}
+				<Component />
 			</Modal>
 		</div>
 	)
