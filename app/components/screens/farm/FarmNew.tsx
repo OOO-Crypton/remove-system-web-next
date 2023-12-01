@@ -36,137 +36,114 @@ const FarmNewScreen: FC = () => {
 							новую ферму
 						</p>
 						<p>
-							Ссылка на скачивание <Link href="/">скачать</Link>
+							Ссылка на скачивание{' '}
+							<Link href="#" style={{ color: 'var(--green)' }}>
+								скачать
+							</Link>
 						</p>
 						<details className={styles.infoDetails}>
-							<summary>Установка загрузочной флешки</summary>
-							<div>
-								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse
-									laudantium sunt, dolorem dolor porro quaerat! Possimus numquam
-									quod eligendi incidunt magnam eaque earum assumenda hic? Quae
-									unde quas necessitatibus dicta. Error illum assumenda
-									temporibus tenetur animi quam ex aliquam est perspiciatis
-									reiciendis odit quis sunt ad quasi, dolore dicta magni nam.
-									Quae illum aliquid, porro atque aut dolores quas alias? Iure
-									ad dolorum dolores consequuntur error alias rerum eius
-									quisquam facere, quod incidunt deleniti doloremque? Distinctio
-									fugiat nostrum nulla, atque non quas. Optio dolor esse
-									pariatur enim iusto id animi. Qui ipsum omnis dolor voluptatem
-									commodi sed facilis, fugit sint amet quod quibusdam ex minima
-									architecto modi pariatur aut est sunt! Temporibus veniam natus
-									magnam, facilis non amet blanditiis earum. Non ipsum, numquam
-									ratione minima obcaecati facilis quisquam error, soluta
-									provident laudantium nobis tempore necessitatibus amet? Velit
-									illo ipsum animi, ullam ratione, nobis, laudantium pariatur
-									incidunt veniam doloribus numquam nulla. Quibusdam unde
-									deserunt aliquam doloremque eaque accusamus aut, autem tempore
-									id amet optio eligendi quas quod natus vitae vel quasi
-									suscipit dicta, minus incidunt ipsa eos ducimus labore error!
-									Totam? Illo numquam vero eveniet libero molestiae eos eius
-									vel! Repudiandae soluta praesentium pariatur ea hic aperiam
-									quas minus, commodi minima sapiente tempora. Iusto at deserunt
-									velit distinctio autem iure hic. Porro vitae amet quae eveniet
-									dicta doloremque possimus consequuntur sequi velit!
-									Accusantium quas commodi omnis! Totam consequuntur voluptates
-									quis. Error alias praesentium, fugit porro nesciunt ut! Quod
-									officia expedita consequatur? Provident iusto quibusdam atque
-									nulla aperiam optio enim fugiat. Exercitationem, ad?
-									Perspiciatis fugit, labore animi neque sit corporis, iste
-									alias dolore in harum quia quos repellat suscipit eos!
-									Doloribus, hic. Distinctio quos provident dolore odio pariatur
-									a praesentium minus, nisi doloribus perferendis quisquam vero
-									quaerat totam ut consequuntur delectus iure magnam omnis quo
-									eum accusantium. Modi temporibus esse inventore quidem!
-								</p>
-							</div>
+							<summary>Создание загрузочной флешки</summary>
+							<ol
+								style={{
+									listStyle: 'auto',
+									paddingLeft: '2rem',
+									color: 'white',
+								}}
+							>
+								<li>Скачайте ISO со страницы</li>
+								<li>Скачать и установить rufus</li>
+								<li>Подключить usb-флешку в пк</li>
+								<li>Запустить rufus</li>
+								<li>Выбрать устройство</li>
+								<li>Выбрать ISO файл</li>
+								<li>
+									Выберите схему разделов, соответствующую используемой вашим
+									накопителем: MBR или GPT
+								</li>
+								<li>Нажмите старт</li>
+								<li>
+									При появлении диалога, выберите первый вариант: «Записать
+									ISO-образ…»
+								</li>
+								<li>Согласитесь докачать недостающие компоненты</li>
+								<li>Подтвердите форматирование устройства</li>
+								<li>Дожидайтесь завершения копирования файлов на носитель</li>
+							</ol>
 						</details>
 						<details className={styles.infoDetails}>
 							<summary>Установка системы на ферму с загрузочной флешки</summary>
-							<div>
-								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse
-									laudantium sunt, dolorem dolor porro quaerat! Possimus numquam
-									quod eligendi incidunt magnam eaque earum assumenda hic? Quae
-									unde quas necessitatibus dicta. Error illum assumenda
-									temporibus tenetur animi quam ex aliquam est perspiciatis
-									reiciendis odit quis sunt ad quasi, dolore dicta magni nam.
-									Quae illum aliquid, porro atque aut dolores quas alias? Iure
-									ad dolorum dolores consequuntur error alias rerum eius
-									quisquam facere, quod incidunt deleniti doloremque? Distinctio
-									fugiat nostrum nulla, atque non quas. Optio dolor esse
-									pariatur enim iusto id animi. Qui ipsum omnis dolor voluptatem
-									commodi sed facilis, fugit sint amet quod quibusdam ex minima
-									architecto modi pariatur aut est sunt! Temporibus veniam natus
-									magnam, facilis non amet blanditiis earum. Non ipsum, numquam
-									ratione minima obcaecati facilis quisquam error, soluta
-									provident laudantium nobis tempore necessitatibus amet? Velit
-									illo ipsum animi, ullam ratione, nobis, laudantium pariatur
-									incidunt veniam doloribus numquam nulla. Quibusdam unde
-									deserunt aliquam doloremque eaque accusamus aut, autem tempore
-									id amet optio eligendi quas quod natus vitae vel quasi
-									suscipit dicta, minus incidunt ipsa eos ducimus labore error!
-									Totam? Illo numquam vero eveniet libero molestiae eos eius
-									vel! Repudiandae soluta praesentium pariatur ea hic aperiam
-									quas minus, commodi minima sapiente tempora. Iusto at deserunt
-									velit distinctio autem iure hic. Porro vitae amet quae eveniet
-									dicta doloremque possimus consequuntur sequi velit!
-									Accusantium quas commodi omnis! Totam consequuntur voluptates
-									quis. Error alias praesentium, fugit porro nesciunt ut! Quod
-									officia expedita consequatur? Provident iusto quibusdam atque
-									nulla aperiam optio enim fugiat. Exercitationem, ad?
-									Perspiciatis fugit, labore animi neque sit corporis, iste
-									alias dolore in harum quia quos repellat suscipit eos!
-									Doloribus, hic. Distinctio quos provident dolore odio pariatur
-									a praesentium minus, nisi doloribus perferendis quisquam vero
-									quaerat totam ut consequuntur delectus iure magnam omnis quo
-									eum accusantium. Modi temporibus esse inventore quidem!
-								</p>
-							</div>
+							<ol
+								style={{
+									listStyle: 'auto',
+									paddingLeft: '2rem',
+									color: 'white',
+								}}
+							>
+								<li>
+									Подключаем подготовленную на прошлом этапе флешку к
+									компьютеру, выключаем его
+								</li>
+								<li>
+									Нажмите кнопку питания для его обратного включения и быстро
+									нажимаем по клавише для вызова меню БИОС
+								</li>
+								<li>
+									Здесь вам потребуется переставить приоритет на загрузку с
+									флешки. Для этого перейдите во вкладку Boot, затем открываем
+									пункт Boot Device Priority и с помощью клавиш навигации,
+									указанных внизу страницы, ставим на первое место наш
+									накопитель. Если вы не знаете английский язык, то
+									воспользуйтесь переводчиком. Меню BIOS на всех компьютерах
+									разный, поэтому одной общей инструкции для изменения
+									приоритета загрузки нет
+								</li>
+								<li>
+									Когда вы установите подготовленный накопитель на первое место,
+									выйдите из меню с сохранением данных. Дождитесь, пока ПК
+									загрузит данные
+								</li>
+								<li>
+									При правильном выполнении предыдущих шагов, вы увидите
+									приветственное окно установки. В левом блоке вы можете выбрать
+									язык, а справа тип установки: это может быть простой запуск
+									Ubuntu для тестирования (система не будет установлена, вы
+									можете просто ознакомиться с ней, например) ну и, собственно,
+									полноценная установка. Нажмите на второй вариант
+								</li>
+								<li>
+									Поставьте необходимые параметры в следующем окне и нажмите
+									«Продолжить»
+								</li>
+								<li>
+									Теперь нужно будет выбрать тип инсталляции. Как говорилось в
+									описании, систему можно ставить как рядом с уже имеющейся, так
+									и вместо неё. Если вам нужна будет Windows, то можете взять
+									первый вариант. Если же вы хотите только Убунту, то выбираем
+									второй тип. Жмём «Продолжить»
+								</li>
+								<li>
+									В следующем окне пользователю предлагается распределить место
+									на диске под систему и файлы. Для этого передвигайте
+									разделитель, чтобы установить необходимые параметры. Когда вы
+									всё распределите, нажмите «Установить сейчас», а в появившемся
+									диалоговом окне кликните «Продолжить», заведомо прочитав
+									представленную информацию
+								</li>
+								<li>
+									Спустя некоторое время вы увидите окно с названием «Кто вы?».
+									Запишите все данные по своему усмотрению (имя, пароль и так
+									далее), затем кликните «Продолжить»
+								</li>
+								<li>
+									Дождитесь завершения процесса. После перезагрузки компьютера
+									будет представлен интерфейс операционной системы
+								</li>
+							</ol>
 						</details>
-						<details className={styles.infoDetails}>
-							<summary>Настройка локальной система</summary>
-							<div>
-								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse
-									laudantium sunt, dolorem dolor porro quaerat! Possimus numquam
-									quod eligendi incidunt magnam eaque earum assumenda hic? Quae
-									unde quas necessitatibus dicta. Error illum assumenda
-									temporibus tenetur animi quam ex aliquam est perspiciatis
-									reiciendis odit quis sunt ad quasi, dolore dicta magni nam.
-									Quae illum aliquid, porro atque aut dolores quas alias? Iure
-									ad dolorum dolores consequuntur error alias rerum eius
-									quisquam facere, quod incidunt deleniti doloremque? Distinctio
-									fugiat nostrum nulla, atque non quas. Optio dolor esse
-									pariatur enim iusto id animi. Qui ipsum omnis dolor voluptatem
-									commodi sed facilis, fugit sint amet quod quibusdam ex minima
-									architecto modi pariatur aut est sunt! Temporibus veniam natus
-									magnam, facilis non amet blanditiis earum. Non ipsum, numquam
-									ratione minima obcaecati facilis quisquam error, soluta
-									provident laudantium nobis tempore necessitatibus amet? Velit
-									illo ipsum animi, ullam ratione, nobis, laudantium pariatur
-									incidunt veniam doloribus numquam nulla. Quibusdam unde
-									deserunt aliquam doloremque eaque accusamus aut, autem tempore
-									id amet optio eligendi quas quod natus vitae vel quasi
-									suscipit dicta, minus incidunt ipsa eos ducimus labore error!
-									Totam? Illo numquam vero eveniet libero molestiae eos eius
-									vel! Repudiandae soluta praesentium pariatur ea hic aperiam
-									quas minus, commodi minima sapiente tempora. Iusto at deserunt
-									velit distinctio autem iure hic. Porro vitae amet quae eveniet
-									dicta doloremque possimus consequuntur sequi velit!
-									Accusantium quas commodi omnis! Totam consequuntur voluptates
-									quis. Error alias praesentium, fugit porro nesciunt ut! Quod
-									officia expedita consequatur? Provident iusto quibusdam atque
-									nulla aperiam optio enim fugiat. Exercitationem, ad?
-									Perspiciatis fugit, labore animi neque sit corporis, iste
-									alias dolore in harum quia quos repellat suscipit eos!
-									Doloribus, hic. Distinctio quos provident dolore odio pariatur
-									a praesentium minus, nisi doloribus perferendis quisquam vero
-									quaerat totam ut consequuntur delectus iure magnam omnis quo
-									eum accusantium. Modi temporibus esse inventore quidem!
-								</p>
-							</div>
-						</details>
+						{/* <details className={styles.infoDetails}>
+							<summary>Настройка локальной системы</summary>
+							<div></div>
+						</details> */}
 						<Button
 							appearance="white"
 							hover="green"
