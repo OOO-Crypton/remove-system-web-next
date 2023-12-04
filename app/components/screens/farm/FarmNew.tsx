@@ -37,7 +37,11 @@ const FarmNewScreen: FC = () => {
 						</p>
 						<p>
 							Ссылка на скачивание{' '}
-							<Link href="#" style={{ color: 'var(--green)' }}>
+							<Link
+								href="https://disk.yandex.ru/d/HiJ9pMgBhfAYTg"
+								target="_blank"
+								style={{ color: 'var(--green)' }}
+							>
 								скачать
 							</Link>
 						</p>
