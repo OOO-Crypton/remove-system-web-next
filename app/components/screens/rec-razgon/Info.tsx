@@ -72,8 +72,10 @@ export const InfoRecRazgonScreen = () => {
 					<div>
 						<SubHeading title={arr[current].name} />
 						<div>
-							{arr[current].description.map((item) => (
-								<p className="mb-2">{item}</p>
+							{arr[current].description.map((item, idx) => (
+								<p key={idx} className="mb-2">
+									{item}
+								</p>
 							))}
 						</div>
 					</div>
