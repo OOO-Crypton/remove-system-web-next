@@ -1,11 +1,15 @@
 import { FC } from 'react'
 
-export const SubHeading: FC<{ title: string; style?: object }> = ({
-	title,
-	style = {},
-}) => {
+export const SubHeading: FC<{
+	title: string
+	style?: object
+	className?: string
+}> = ({ title, style = {}, className = '' }) => {
 	return (
-		<h2 className="text-white text-xl mb-5 font-semibold" style={style}>
+		<h2
+			className={`text-white text-xl mb-5 font-semibold ${className}`}
+			style={style}
+		>
 			{title}
 		</h2>
 	)

@@ -26,6 +26,9 @@
 	}
 
 	&.error {
+		input {
+			@apply border-primary border-2;
+		}
 		> p {
 			@apply text-sm w-full text-primary;
 		}

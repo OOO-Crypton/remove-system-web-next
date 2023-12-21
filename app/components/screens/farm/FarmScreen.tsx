@@ -1,4 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useFarmsContext } from 'providers/FarmsProvider/FarmProvider'
 import { FC, useEffect, useState } from 'react'
@@ -62,6 +63,14 @@ export const FarmScreen: FC = () => {
 		<Meta title="Home">
 			<div className={styles.farms}>
 				<Heading title="Мои фермы" />
+				<div className={styles.info}>
+					<SubHeading title="Полезная информация" />
+					<Link href="/info-razgon">Формирование рекомендаций по разгону</Link>
+					<Link href="/info-thermal-energy">
+						Формирование рекомендаций по альтернативному использованию
+						выделяемой тепловой энергии
+					</Link>
+				</div>
 				{farms.length ? (
 					<div>
 						<SubHeading

@@ -4,25 +4,30 @@ import { FC } from 'react'
 
 import { Button, Heading, MaterialIcon, SubHeading } from '@/components/ui'
 
+import { useAuth } from '@/hooks/useAuth'
+
 import { Meta } from '@/utils/meta'
 
 import styles from './Home.module.scss'
 
 const HomeScreen: FC = () => {
 	const { push } = useRouter()
+	const { token } = useAuth()
 	return (
 		<Meta title="Главная" description="Главаня">
 			<div className={styles.container}>
 				<div className={styles.head}>
 					<div className={styles.info}>
 						<Heading title="CryptonOS — стабильная, система для майнинга на видеокартах. Максимальный хэшрейт при меньшем потреблении электроэнергии." />
-						<Button
-							appearance="white"
-							hover="green"
-							onClick={() => push('/register')}
-						>
-							Зарегистрироваться
-						</Button>
+						{!token && (
+							<Button
+								appearance="white"
+								hover="green"
+								onClick={() => push('/register')}
+							>
+								Зарегистрироваться
+							</Button>
+						)}
 					</div>
 					<Image
 						src="/img/png/home.png"
@@ -262,7 +267,7 @@ const HomeScreen: FC = () => {
 					<Button
 						appearance="white"
 						hover="green"
-						onClick={() => push('/recommendations-razgon')}
+						onClick={() => push('/thermal-energy')}
 					>
 						Альтернативное использование выделяемой тепловой энергии
 					</Button>
