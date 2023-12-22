@@ -1,4 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit'
+import { count } from 'console'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
@@ -161,6 +162,9 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 										? farmInfo?.activeFlightSheet.name
 										: '-'}
 								</span>
+							</p>
+							<p>
+								Выделяемая тепловая энергия: <span>-</span>
 							</p>
 						</div>
 					</div>
