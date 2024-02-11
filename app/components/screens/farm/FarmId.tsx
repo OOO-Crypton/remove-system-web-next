@@ -1,11 +1,10 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { count } from 'console'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 
-import { Button, Heading, SubHeading } from '@/components/ui'
+import { Button, Heading, SubHeading, Toggle } from '@/components/ui'
 
 import { useAuth } from '@/hooks/useAuth'
 
@@ -23,7 +22,7 @@ import {
 	SettingVideoCard,
 } from './modal'
 
-export type ModalType = 'start' | 'choice' | 'auto' | 'setting'
+export type ModalType = 'start' | 'choice' | 'auto' | 'setting' | 'acceleration'
 
 const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 	const { push } = useRouter()
@@ -106,11 +105,7 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 				return <SettingVideoCard number={currentVideo} close={closeModal} />
 			case 'auto':
 				return (
-					<SettingAutoVideoCard
-						number={currentVideo}
-						auto={false}
-						close={closeModal}
-					/>
+					<SettingAutoVideoCard number={currentVideo + 1} close={closeModal} />
 				)
 			default:
 				return <></>
@@ -208,6 +203,14 @@ const FarmIdScreen: FC<{ id: number }> = ({ id }) => {
 									Запустить
 								</Button>
 							)}
+							<Button appearance="white" hover="green">
+								Разгон в ручном режиме
+							</Button>
+							<Toggle
+								labelRight="Автонастройка"
+								toggled={false}
+								onClick={() => {}}
+							/>
 							<Button
 								appearance="white"
 								hover="red"

@@ -4,8 +4,8 @@ import { FC, useState } from 'react'
 import styles from './Toggle.module.scss'
 
 interface iToggle {
-	labelLeft: string
-	labelRight: string
+	labelLeft?: string
+	labelRight?: string
 	toggled: boolean
 	onClick: (isToggled: boolean) => void
 	className?: string

@@ -83,3 +83,23 @@ ul {
 		color: #000;
 	}
 }
+
+.container {
+	@apply p-4 rounded-md m-auto;
+
+	&__heading {
+		@apply flex justify-between items-center;
+	}
+
+	&__btns {
+		@apply flex gap-2 my-3;
+	}
+}
+
+.form {
+	@apply flex flex-col gap-4;
+
+	button {
+		@apply w-max m-auto;
+	}
+}

@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, CSSProperties, InputHTMLAttributes } from 'react'
-import { FieldError } from 'react-hook-form'
+import { Control, FieldError, RegisterOptions } from 'react-hook-form'
 
 export interface IFieldProps {
 	placeholder: string
@@ -20,3 +20,26 @@ export interface IUploadField {
 }
 
 export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export interface ISelectField {
+	id: string
+	placeholder: string
+	control: Control<any>
+	rules?:
+		| Omit<
+				RegisterOptions<any, string>,
+				'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+		  >
+		| undefined
+	options?: ISelect[]
+	error?: FieldError | any
+	isMulti?: boolean
+	required?: boolean
+	disabled?: boolean
+	isOptionDisabled?: number
+}
+
+export interface ISelect {
+	label: string
+	value: string | number
+}
