@@ -9,7 +9,7 @@ export const refreshTokenFn = async () => {
 	if (token) {
 		try {
 			const { status, data } = await axiosPrivate.get(
-				`/refresh-token?AccessToken=${token}&RefreshToken=${refreshToken}`
+				`/refresh-token?token=${token}&RefreshToken=${refreshToken}`
 			)
 			if (status === 200) {
 				if (!data?.token) {

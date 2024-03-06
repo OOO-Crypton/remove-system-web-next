@@ -21,8 +21,8 @@ const AuthProvider: FC<TypeComponentAuthFields> = ({
 	const { pathname } = useRouter()
 
 	useEffect(() => {
-		const accessToken = Cookies.get('accessToken')
-		if (accessToken) checkAuth()
+		const token = Cookies.get('token')
+		if (token) checkAuth()
 	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {

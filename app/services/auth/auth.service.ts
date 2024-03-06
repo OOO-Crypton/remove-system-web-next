@@ -39,10 +39,10 @@ export const AuthService = {
 	},
 	async getNewTokens() {
 		const refreshToken = Cookies.get('refreshToken')
-		const accessToken = Cookies.get('accessToken')
+		const token = Cookies.get('token')
 		const response = await axiosPrivate.post<IAuthResponse>(
 			`${API_URL}${`/refresh-token`}`,
-			{ AccessToken: accessToken, RefreshToken: refreshToken },
+			{ token: token, RefreshToken: refreshToken },
 			{
 				headers: getContentType(),
 			}
