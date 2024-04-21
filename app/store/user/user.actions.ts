@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { errorCatch } from 'api/api.helpers'
+import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 import { toast } from 'react-toastify'
 
@@ -36,14 +37,18 @@ export const login = createAsyncThunk<IAuthResponse, ILogin>(
 	'auth/login',
 	async ({ email, password }, thunkAPI) => {
 		try {
-			const { data } = await AuthService.login(email, password)
+			await AuthService.login(email, password)
 			toast.success('Авторизация успешная')
 
-			const decodeToken: any = jwtDecode(data.token!)
+			const token = Cookies.get('token')!.toString()
+			const refreshToken = Cookies.get('refreshToken')!.toString()
+			const decodeToken: any = jwtDecode(token)
 
+			console.log(token, refreshToken)
 			return {
-				...data,
 				isAdmin: decodeToken.Role === 'Admin' ? true : false,
+				token,
+				refreshToken,
 			}
 		} catch (error) {
 			toast.error('Error request')
@@ -60,9 +65,17 @@ export const checkAuth = createAsyncThunk<IAuthResponse>(
 	'auth/check-auth',
 	async (_, thunkAPI) => {
 		try {
-			const { data } = await AuthService.getNewTokens()
-			const decodeToken: any = jwtDecode(data.token!)
-			return { ...data, isAdmin: decodeToken.Role === 'Admin' ? true : false }
+			// await AuthService.getNewTokens()
+
+			const token = Cookies!.get('token')!.toString()
+			const refreshToken = Cookies!.get('refreshToken')!.toString()
+			const decodeToken: any = jwtDecode(token)
+
+			return {
+				isAdmin: decodeToken.Role === 'Admin' ? true : false,
+				token,
+				refreshToken,
+			}
 		} catch (error) {
 			if (errorCatch(error) === 'jwt expired') {
 				toast.error('Your authorizaiton is finished, plz sign in again')

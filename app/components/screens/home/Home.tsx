@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -13,6 +14,8 @@ import styles from './Home.module.scss'
 const HomeScreen: FC = () => {
 	const { push } = useRouter()
 	const { token } = useAuth()
+	console.log(Cookies.get('token'))
+
 	return (
 		<Meta title="Главная" description="Главаня">
 			<div className={styles.container}>

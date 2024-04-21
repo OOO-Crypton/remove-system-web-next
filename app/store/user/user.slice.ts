@@ -7,6 +7,7 @@ const initialState: IUserInitialState = {
 	token: null,
 	refreshToken: null,
 	isLoading: false,
+	isAdmin: false,
 }
 
 export const userSlice = createSlice({

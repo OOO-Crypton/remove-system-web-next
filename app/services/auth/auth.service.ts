@@ -22,29 +22,34 @@ export const AuthService = {
 		return response
 	},
 	async login(email: string, password: string) {
-		const response = await axiosPrivate.post<ITokens>(`${API_URL}${'/login'}`, {
-			email,
-			password,
-		})
+		await axiosPrivate.post<ITokens>(
+			`${API_URL}${'/login'}`,
+			{
+				email,
+				password,
+			},
+			{
+				headers: { credentials: 'include' },
+			}
+		)
+		// console.log(response)
 
-		if (response.data.token) {
-			saveToStorage(response.data)
-		}
-
-		return response
+		// if (response.data.token) {
+		// 	saveToStorage(response.data)
+		// }
 	},
 	logout() {
 		removeTokensStorage()
 		localStorage.removeItem('user')
 	},
 	async getNewTokens() {
-		const refreshToken = Cookies.get('refreshToken')
-		const token = Cookies.get('token')
 		const response = await axiosPrivate.post<IAuthResponse>(
 			`${API_URL}${`/refresh-token`}`,
-			{ token: token, RefreshToken: refreshToken },
+			null,
 			{
-				headers: getContentType(),
+				headers: {
+					credentials: 'include',
+				},
 			}
 		)
 

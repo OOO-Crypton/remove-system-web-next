@@ -14,6 +14,7 @@ export interface IUserInitialState {
 	token: string | null
 	refreshToken: string | null
 	isLoading: boolean
+	isAdmin: boolean
 }
 
 export interface IRegister {
